@@ -4,7 +4,7 @@ import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { X, Send } from "lucide-react";
 
 // TODO: Replace with your Kapso WhatsApp number (digits only, e.g. "34612345678")
-const WHATSAPP_NUMBER = "REPLACE_ME";
+const WHATSAPP_NUMBER = "12084084168";
 
 const QUICK_REPLIES = [
   { label: "Post a job", message: "Hi Migo, I'd like to post a job" },
