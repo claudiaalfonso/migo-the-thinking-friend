@@ -5,7 +5,7 @@ import WhatsAppIcon from "@/components/WhatsAppIcon";
 
 // TODO: Replace with your Kapso WhatsApp number (digits only, e.g. "34612345678")
 const WHATSAPP_NUMBER = "12084084168";
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hi Migo, I'm interested in the pilot!")}`;
+const WHATSAPP_URL = `https://api.whatsapp.com/send/?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent("Hi Migo, I'm interested in the pilot!")}&type=phone_number&app_absent=0`;
 
 const Pilot = () => {
   const [submitted, setSubmitted] = useState(false);
