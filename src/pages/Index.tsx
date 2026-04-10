@@ -7,7 +7,8 @@ import Pilot from "@/components/landing/Pilot";
 import AnimatedSection from "@/components/landing/AnimatedSection";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
-const Index = () => (
+const Index = () => {
+  return (
   <>
     <Header />
     <FloatingWhatsApp />
@@ -32,6 +33,7 @@ const Index = () => (
       © {new Date().getFullYear()} Migo AI. All rights reserved.
     </footer>
   </>
-);
+  );
+};
 
 export default Index;
