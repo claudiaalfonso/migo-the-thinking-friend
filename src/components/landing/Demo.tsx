@@ -1,27 +1,118 @@
-import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { RotateCcw, Check } from "lucide-react";
 
-const initialMessages = [
-  { from: "migo", text: "Hey! I'm Migo, screening for a product engineering role. Mind sharing a recent project?" },
-  { from: "migo", text: "Anything with real users — a side project counts too." },
+const messages = [
+  { type: "migo", text: "Hey! I'm Migo, screening for a product engineering role. Mind sharing a recent project?" },
+  { type: "user", text: "I built a realtime voice agent for dental clinics." },
+  { type: "migo", text: "Nice — that sounds like strong full-stack signal. Can you share a link or demo?" },
+  { type: "user", text: "Sure — here's the repo and a 2-min Loom walkthrough." },
+  { type: "migo", text: "Perfect. Last one — what's your availability and salary range?" },
+  { type: "user", text: "Available in 2 weeks, looking for €65-80k." },
+  { type: "migo", text: "Got it. You're on the shortlist — the hiring team will reach out today. 🎯" },
 ];
 
-const Demo = () => {
-  const [messages, setMessages] = useState(initialMessages);
-  const [input, setInput] = useState("I built a realtime voice agent for dental clinics.");
+function TypingIndicator() {
+  return (
+    <div className="flex justify-start">
+      <div className="bg-[#1f2c34] rounded-lg rounded-bl-sm px-3 py-2 flex items-center gap-1">
+        <motion.span className="w-1.5 h-1.5 bg-[#8696a0] rounded-full" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1, repeat: Infinity, delay: 0 }} />
+        <motion.span className="w-1.5 h-1.5 bg-[#8696a0] rounded-full" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1, repeat: Infinity, delay: 0.2 }} />
+        <motion.span className="w-1.5 h-1.5 bg-[#8696a0] rounded-full" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1, repeat: Infinity, delay: 0.4 }} />
+      </div>
+    </div>
+  );
+}
 
-  const handleSend = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim()) return;
-    setMessages((m) => [
-      ...m,
-      { from: "user", text: input },
-      { from: "migo", text: "Nice — that sounds like strong full-stack signal. Can you share a link or demo?" },
-    ]);
-    setInput("");
+function UserComposingIndicator() {
+  return (
+    <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.15 }} className="flex justify-end">
+      <div className="bg-[#005c4b]/60 rounded-lg rounded-br-sm px-3 py-2 flex items-center gap-1">
+        <motion.span className="w-1.5 h-1.5 bg-white/50 rounded-full" animate={{ opacity: [0.3, 0.8, 0.3] }} transition={{ duration: 0.8, repeat: Infinity, delay: 0 }} />
+        <motion.span className="w-1.5 h-1.5 bg-white/50 rounded-full" animate={{ opacity: [0.3, 0.8, 0.3] }} transition={{ duration: 0.8, repeat: Infinity, delay: 0.12 }} />
+        <motion.span className="w-1.5 h-1.5 bg-white/50 rounded-full" animate={{ opacity: [0.3, 0.8, 0.3] }} transition={{ duration: 0.8, repeat: Infinity, delay: 0.24 }} />
+      </div>
+    </motion.div>
+  );
+}
+
+function ReadReceipt({ isRead }: { isRead: boolean }) {
+  return (
+    <span className="inline-flex ml-1">
+      <Check className={`w-2.5 h-2.5 -mr-1.5 ${isRead ? "text-[#53bdeb]" : "text-[#8696a0]"}`} />
+      <Check className={`w-2.5 h-2.5 ${isRead ? "text-[#53bdeb]" : "text-[#8696a0]"}`} />
+    </span>
+  );
+}
+
+const Demo = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
+  const [showTyping, setShowTyping] = useState(false);
+  const [showUserComposing, setShowUserComposing] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [hasPlayed, setHasPlayed] = useState(false);
+  const timeoutIds = useRef<NodeJS.Timeout[]>([]);
+
+  const isMessageRead = (index: number) => {
+    if (messages[index].type !== "user") return false;
+    for (let i = index + 1; i < messages.length; i++) {
+      if (messages[i].type === "migo") return visibleMessages.includes(i);
+    }
+    return false;
   };
 
+  const playConversation = () => {
+    timeoutIds.current.forEach(clearTimeout);
+    timeoutIds.current = [];
+    setVisibleMessages([]);
+    setIsPlaying(true);
+    setShowTyping(false);
+    setShowUserComposing(false);
+
+    let delay = 0;
+
+    messages.forEach((message, index) => {
+      if (message.type === "migo") {
+        timeoutIds.current.push(setTimeout(() => setShowTyping(true), delay));
+        delay += 1400;
+        timeoutIds.current.push(setTimeout(() => {
+          setShowTyping(false);
+          setVisibleMessages((prev) => [...prev, index]);
+        }, delay));
+        delay += 800;
+      } else {
+        timeoutIds.current.push(setTimeout(() => setShowUserComposing(true), delay));
+        delay += 700;
+        timeoutIds.current.push(setTimeout(() => {
+          setShowUserComposing(false);
+          setVisibleMessages((prev) => [...prev, index]);
+        }, delay));
+        delay += 900;
+      }
+
+      if (index === messages.length - 1) {
+        timeoutIds.current.push(setTimeout(() => setIsPlaying(false), delay));
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (isInView && !hasPlayed) {
+      setHasPlayed(true);
+      const timer = setTimeout(() => playConversation(), 500);
+      return () => {
+        clearTimeout(timer);
+        timeoutIds.current.forEach(clearTimeout);
+      };
+    }
+  }, [isInView, hasPlayed]);
+
   return (
-    <section className="py-20 px-6 bg-muted/50" id="demo">
+    <section className="py-20 px-6 bg-muted/50" id="demo" ref={ref}>
       <div className="max-w-6xl mx-auto space-y-10">
         <div className="space-y-3 max-w-xl">
           <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground">WhatsApp first</p>
@@ -30,37 +121,88 @@ const Demo = () => {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Phone */}
-          <div className="rounded-2xl border border-border bg-background overflow-hidden shadow-sm">
-            <div className="px-4 py-3 border-b border-border flex justify-between text-sm font-medium">
-              <span>Migo</span>
-              <span className="text-muted-foreground text-xs">online</span>
-            </div>
-            <div className="p-4 space-y-3 min-h-[260px] max-h-[320px] overflow-y-auto">
-              {messages.map((m, i) => (
-                <div key={i} className={`flex ${m.from === "user" ? "justify-end" : "justify-start"}`}>
-                  <div className={`max-w-[80%] px-3 py-2 rounded-xl text-sm ${
-                    m.from === "user"
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-muted text-foreground"
-                  }`}>
-                    {m.text}
+        <div className="grid md:grid-cols-2 gap-8 items-start">
+          {/* WhatsApp Phone */}
+          <div className="flex justify-center">
+            <div className="relative">
+              <div className="relative bg-[#111] rounded-[2rem] p-2 shadow-lg w-full max-w-[280px]" style={{ aspectRatio: "9/19" }}>
+                <div className="relative w-full h-full bg-[#0b141a] rounded-[1.5rem] overflow-hidden flex flex-col">
+                  {/* Header */}
+                  <div className="bg-[#1f2c34] px-3 py-2 flex items-center gap-2 flex-shrink-0">
+                    <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center">
+                      <span className="text-primary-foreground text-xs font-bold">M</span>
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-white text-xs font-medium">Migo</p>
+                      <p className="text-[#8696a0] text-[10px]">
+                        {showTyping ? (
+                          <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[#25D366]">typing...</motion.span>
+                        ) : "online"}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Messages */}
+                  <div className="flex-1 px-2 py-3 space-y-1.5 overflow-hidden flex flex-col justify-end">
+                    {messages.map((message, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                        animate={visibleMessages.includes(index) ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 8, scale: 0.95 }}
+                        transition={{ duration: 0.25 }}
+                        className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}
+                      >
+                        <div className={`max-w-[85%] px-2.5 py-1 rounded-lg text-[10px] leading-relaxed ${
+                          message.type === "user" ? "bg-[#005c4b] text-white rounded-br-sm" : "bg-[#1f2c34] text-white rounded-bl-sm"
+                        }`}>
+                          <span>{message.text}</span>
+                          {message.type === "user" && (
+                            <span className="inline-flex items-center ml-1.5 text-[8px] text-[#8696a0]">
+                              <span className="mr-0.5">now</span>
+                              <ReadReceipt isRead={isMessageRead(index)} />
+                            </span>
+                          )}
+                          {message.type === "migo" && (
+                            <span className="inline-flex items-center ml-1.5 text-[8px] text-[#8696a0]">now</span>
+                          )}
+                        </div>
+                      </motion.div>
+                    ))}
+
+                    <AnimatePresence>
+                      {showTyping && (
+                        <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }}>
+                          <TypingIndicator />
+                        </motion.div>
+                      )}
+                      {showUserComposing && <UserComposingIndicator />}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* Input */}
+                  <div className="px-2 pb-2 flex-shrink-0">
+                    <div className="bg-[#1f2c34] rounded-full px-3 py-1.5 flex items-center">
+                      <span className="text-[#8696a0] text-[10px] flex-1">Message</span>
+                    </div>
                   </div>
                 </div>
-              ))}
+
+                {/* Notch */}
+                <div className="absolute top-3 left-1/2 -translate-x-1/2 w-16 h-4 bg-[#111] rounded-full" />
+              </div>
+
+              {/* Replay */}
+              <motion.button
+                onClick={() => playConversation()}
+                disabled={isPlaying}
+                className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-1.5 text-xs transition-colors disabled:opacity-50 text-muted-foreground hover:text-foreground"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <RotateCcw className={`w-3 h-3 ${isPlaying ? "animate-spin" : ""}`} />
+                <span>Replay</span>
+              </motion.button>
             </div>
-            <form onSubmit={handleSend} className="flex border-t border-border">
-              <input
-                className="flex-1 px-4 py-3 text-sm bg-transparent outline-none placeholder:text-muted-foreground"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Reply to Migo…"
-              />
-              <button type="submit" className="px-4 text-sm font-semibold text-primary hover:text-primary/80 transition-colors">
-                Send
-              </button>
-            </form>
           </div>
 
           {/* Scoreboard */}
