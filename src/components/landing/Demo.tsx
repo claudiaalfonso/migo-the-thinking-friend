@@ -47,7 +47,8 @@ function ReadReceipt({ read }: { read: boolean }) {
   );
 }
 
-  const Demo = () => {
+const Demo = () => {
+  const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
