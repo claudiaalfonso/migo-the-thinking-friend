@@ -112,27 +112,27 @@ const Demo = () => {
   }, [isInView, hasPlayed]);
 
   return (
-    <section className="py-20 px-6 bg-muted/50" id="demo" ref={ref}>
-      <div className="max-w-6xl mx-auto space-y-10">
-        <div className="space-y-3 max-w-xl">
+    <section className="py-24 px-6 border-t-2 border-foreground" id="demo" ref={ref}>
+      <div className="max-w-7xl mx-auto space-y-12">
+        <div className="space-y-4 max-w-2xl">
           <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground">WhatsApp first</p>
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-foreground">
+          <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-foreground leading-[1.1]">
             Migo keeps the chat warm, then structures the evidence.
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Chat widget */}
           <div className="flex justify-center">
-            <div className="w-full max-w-[340px] rounded-lg border border-border bg-background overflow-hidden shadow-sm">
+            <div className="w-full max-w-[380px] rounded-xl border-2 border-foreground bg-card overflow-hidden shadow-lg">
               {/* Header */}
-              <div className="flex items-center justify-between px-4 py-2.5 border-b border-border bg-card">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-full bg-muted flex items-center justify-center">
-                    <span className="text-xs font-bold text-foreground">M</span>
+              <div className="flex items-center justify-between px-4 py-3 border-b-2 border-foreground bg-card">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-foreground flex items-center justify-center">
+                    <span className="text-xs font-black text-background">M</span>
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-foreground leading-tight">Migo</p>
+                    <p className="text-sm font-bold text-foreground leading-tight">Migo</p>
                     <p className="text-[10px] text-muted-foreground leading-tight">
                       {showTyping ? (
                         <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-foreground">typing…</motion.span>
@@ -152,7 +152,7 @@ const Demo = () => {
               </div>
 
               {/* Messages */}
-              <div className="px-3 py-3 space-y-1.5 min-h-[220px] max-h-[320px] overflow-y-auto flex flex-col justify-end">
+              <div className="px-4 py-4 space-y-2 min-h-[240px] max-h-[360px] overflow-y-auto flex flex-col justify-end bg-background">
                 {messages.map((message, index) => (
                   <motion.div
                     key={index}
@@ -161,20 +161,20 @@ const Demo = () => {
                     transition={{ duration: 0.2 }}
                     className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}
                   >
-                    <div className={`max-w-[85%] px-2.5 py-1.5 rounded-lg text-xs leading-relaxed ${
+                    <div className={`max-w-[85%] px-3 py-2 rounded-lg text-sm leading-relaxed ${
                       message.type === "user"
                         ? "bg-foreground text-background rounded-br-sm"
                         : "bg-muted text-foreground rounded-bl-sm"
                     }`}>
                       <span>{message.text}</span>
                       {message.type === "user" && (
-                        <span className="inline-flex items-center ml-1.5 text-[9px] opacity-60">
+                        <span className="inline-flex items-center ml-2 text-[9px] opacity-60">
                           <span className="mr-0.5">now</span>
                           <ReadReceipt read={isMessageRead(index)} />
                         </span>
                       )}
                       {message.type === "migo" && (
-                        <span className="inline-flex items-center ml-1.5 text-[9px] text-muted-foreground">now</span>
+                        <span className="inline-flex items-center ml-2 text-[9px] text-muted-foreground">now</span>
                       )}
                     </div>
                   </motion.div>
@@ -191,38 +191,34 @@ const Demo = () => {
               </div>
 
               {/* Input */}
-              <div className="px-3 pb-3">
-                <div className="bg-muted rounded-md px-3 py-2 flex items-center">
-                  <span className="text-muted-foreground text-xs">Message</span>
+              <div className="px-4 pb-4 bg-background">
+                <div className="bg-muted border border-border rounded-lg px-4 py-2.5 flex items-center">
+                  <span className="text-muted-foreground text-sm">Message</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Scoreboard */}
-          <div className="rounded-2xl border border-border bg-background p-6 space-y-5 shadow-sm">
-            <div className="space-y-1">
-              <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground">Employer view</p>
-              <h3 className="text-lg font-bold text-foreground">Shortlist, ranked by hiring signal.</h3>
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <h3 className="text-3xl sm:text-4xl font-black text-foreground">Shortlist, ranked by hiring signal.</h3>
             </div>
-
-            {[
-              { name: "Maya R.", desc: "Full-stack product, integrations, automation", score: 94, active: true },
-              { name: "Leo M.", desc: "Sales ops, CRM automation, RevOps", score: 88 },
-              { name: "Ina S.", desc: "Customer success, QA, process design", score: 83 },
-            ].map((c, i) => (
-              <div key={i} className={`flex items-center justify-between p-3 rounded-lg border ${c.active ? "border-foreground bg-muted" : "border-border"}`}>
-                <div>
-                  <h4 className="font-semibold text-sm">{c.name}</h4>
-                  <p className="text-xs text-muted-foreground">{c.desc}</p>
+            
+            <div className="border-t-2 border-foreground pt-6 space-y-4">
+              {[
+                { name: "Maya R.", desc: "Full-stack product, integrations, automation", score: 94, active: true },
+                { name: "Leo M.", desc: "Sales ops, CRM automation, RevOps", score: 88 },
+                { name: "Ina S.", desc: "Customer success, QA, process design", score: 83 },
+              ].map((c, i) => (
+                <div key={i} className={`flex items-center justify-between p-5 rounded-xl border-2 ${c.active ? "border-foreground bg-[hsl(var(--lime))]" : "border-foreground bg-card"}`}>
+                  <div>
+                    <h4 className="font-bold text-lg text-foreground">{c.name}</h4>
+                    <p className="text-sm text-muted-foreground">{c.desc}</p>
+                  </div>
+                  <span className="bg-foreground text-background text-2xl font-black px-4 py-2 rounded-lg">{c.score}</span>
                 </div>
-                <span className="text-2xl font-extrabold text-foreground">{c.score}</span>
-              </div>
-            ))}
-
-            <div className="pt-3 border-t border-border text-xs text-muted-foreground space-y-1">
-              <span>Evidence captured</span>
-              <p className="font-semibold text-foreground">Voice sample, project links, availability, salary range, work rights</p>
+              ))}
             </div>
           </div>
         </div>
