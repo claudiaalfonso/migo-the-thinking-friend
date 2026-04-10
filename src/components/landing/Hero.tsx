@@ -8,8 +8,14 @@ const Hero = () => (
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[0.95] tracking-tight text-foreground">
           Migo screens candidates before your calendar gets wrecked.
         </h1>
-        <p className="text-xl text-muted-foreground max-w-lg leading-relaxed">
-          A WhatsApp and voice agent that interviews candidates, checks signal, and hands employers a ranked shortlist with receipts.
+        <p className="text-xl max-w-lg leading-relaxed">
+          <span className="text-muted-foreground">A WhatsApp and voice agent that </span>
+          <span className="font-semibold text-foreground">interviews candidates</span>
+          <span className="text-muted-foreground">, checks </span>
+          <span className="font-semibold text-foreground">signal</span>
+          <span className="text-muted-foreground">, and hands employers a </span>
+          <span className="font-semibold text-foreground">ranked shortlist</span>
+          <span className="text-muted-foreground"> with receipts.</span>
         </p>
         <div className="flex flex-wrap gap-4 pt-4">
           <Button asChild size="lg" className="h-14 px-8 rounded-md font-bold text-base bg-[hsl(var(--lime))] text-foreground hover:bg-[hsl(78,84%,60%)]">
