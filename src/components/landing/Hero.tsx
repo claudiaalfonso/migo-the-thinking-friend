@@ -4,7 +4,7 @@ const Hero = () => (
   <section className="pt-28 pb-20 px-6" id="top">
     <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
       <div className="space-y-6">
-        <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground">Your cutest serious recruiter</p>
+        
         <h1 className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight text-foreground">
           Migo screens candidates before your calendar gets wrecked.
         </h1>
