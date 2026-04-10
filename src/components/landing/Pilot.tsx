@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import { openWhatsAppUrl } from "@/lib/whatsapp";
 
 // TODO: Replace with your Kapso WhatsApp number (digits only, e.g. "34612345678")
 const WHATSAPP_NUMBER = "12084084168";
@@ -54,15 +55,14 @@ const Pilot = () => {
               Request access
             </Button>
             <p className="text-xs text-muted-foreground">Migo will reply with the pilot brief.</p>
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => openWhatsAppUrl(WHATSAPP_URL)}
               className="flex items-center justify-center gap-2 text-sm font-medium text-[#25D366] hover:underline pt-1"
             >
               <WhatsAppIcon className="w-4 h-4" />
               Or chat with Migo on WhatsApp
-            </a>
+            </button>
           </form>
         )}
       </div>

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { X, Send } from "lucide-react";
+import { openWhatsAppUrl } from "@/lib/whatsapp";
 
 // TODO: Replace with your Kapso WhatsApp number (digits only, e.g. "34612345678")
 const WHATSAPP_NUMBER = "12084084168";
@@ -69,12 +70,12 @@ export default function FloatingWhatsApp() {
 
   const handleSend = () => {
     const text = inputValue.trim() || "Hi Migo!";
-    window.open(getWhatsAppUrl(text), "_blank", "noopener,noreferrer");
+    openWhatsAppUrl(getWhatsAppUrl(text));
     setInputValue("");
   };
 
   const handleQuickReply = (message: string) => {
-    window.open(getWhatsAppUrl(message), "_blank", "noopener,noreferrer");
+    openWhatsAppUrl(getWhatsAppUrl(message));
   };
 
   const now = new Date();
