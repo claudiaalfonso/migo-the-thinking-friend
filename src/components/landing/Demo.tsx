@@ -1,8 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { RotateCcw, Check, MessageCircle } from "lucide-react";
-import WhatsAppIcon from "@/components/WhatsAppIcon";
+import { RotateCcw, Check } from "lucide-react";
 
 const messages = [
   { type: "migo", text: "Hey! What kind of role are you after?" },
@@ -17,10 +16,10 @@ const messages = [
 function TypingIndicator() {
   return (
     <div className="flex justify-start">
-      <div className="bg-[#1f2c34] rounded-lg rounded-bl-sm px-3 py-2 flex items-center gap-1">
-        <motion.span className="w-1.5 h-1.5 bg-[#8696a0] rounded-full" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1, repeat: Infinity, delay: 0 }} />
-        <motion.span className="w-1.5 h-1.5 bg-[#8696a0] rounded-full" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1, repeat: Infinity, delay: 0.2 }} />
-        <motion.span className="w-1.5 h-1.5 bg-[#8696a0] rounded-full" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1, repeat: Infinity, delay: 0.4 }} />
+      <div className="bg-muted rounded-lg rounded-bl-sm px-3 py-2 flex items-center gap-1">
+        {[0, 0.2, 0.4].map((delay, i) => (
+          <motion.span key={i} className="w-1.5 h-1.5 bg-muted-foreground/40 rounded-full" animate={{ opacity: [0.3, 0.8, 0.3] }} transition={{ duration: 1, repeat: Infinity, delay }} />
+        ))}
       </div>
     </div>
   );
@@ -28,11 +27,11 @@ function TypingIndicator() {
 
 function UserComposingIndicator() {
   return (
-    <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.15 }} className="flex justify-end">
-      <div className="bg-[#005c4b] rounded-lg rounded-br-sm px-3 py-2 flex items-center gap-1">
-        <motion.span className="w-1.5 h-1.5 bg-[#8696a0] rounded-full" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1, repeat: Infinity, delay: 0 }} />
-        <motion.span className="w-1.5 h-1.5 bg-[#8696a0] rounded-full" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1, repeat: Infinity, delay: 0.2 }} />
-        <motion.span className="w-1.5 h-1.5 bg-[#8696a0] rounded-full" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1, repeat: Infinity, delay: 0.4 }} />
+    <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.15 }} className="flex justify-end">
+      <div className="bg-foreground/10 rounded-lg rounded-br-sm px-3 py-2 flex items-center gap-1">
+        {[0, 0.2, 0.4].map((delay, i) => (
+          <motion.span key={i} className="w-1.5 h-1.5 bg-muted-foreground/40 rounded-full" animate={{ opacity: [0.3, 0.8, 0.3] }} transition={{ duration: 1, repeat: Infinity, delay }} />
+        ))}
       </div>
     </motion.div>
   );
@@ -41,8 +40,8 @@ function UserComposingIndicator() {
 function ReadReceipt({ read }: { read: boolean }) {
   return (
     <span className="inline-flex ml-1">
-      <Check className={`w-3 h-3 ${read ? "text-[#53bdeb]" : "text-[#8696a0]"}`} />
-      <Check className={`w-3 h-3 -ml-1.5 ${read ? "text-[#53bdeb]" : "text-[#8696a0]"}`} />
+      <Check className={`w-3 h-3 ${read ? "text-primary" : "text-muted-foreground/50"}`} />
+      <Check className={`w-3 h-3 -ml-1.5 ${read ? "text-primary" : "text-muted-foreground/50"}`} />
     </span>
   );
 }
@@ -123,86 +122,80 @@ const Demo = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 items-start">
-          {/* WhatsApp Phone */}
+          {/* Chat widget */}
           <div className="flex justify-center">
-            <div className="relative">
-              <div className="relative bg-[#111] rounded-[2rem] p-2 shadow-lg w-full max-w-[280px] md:max-w-[320px]" style={{ aspectRatio: "9/19" }}>
-                <div className="relative w-full h-full bg-[#0b141a] rounded-[1.5rem] overflow-hidden flex flex-col">
-                  {/* Header */}
-                  <div className="bg-[#1f2c34] px-3 py-2 flex items-center gap-2 flex-shrink-0">
-                    <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-[#25D366] flex items-center justify-center">
-                      <WhatsAppIcon className="w-3.5 h-3.5 md:w-4 md:h-4 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-white text-xs md:text-sm font-medium">Migo</p>
-                      <p className="text-[#8696a0] text-[10px] md:text-xs">
-                        {showTyping ? (
-                          <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[#25D366]">typing...</motion.span>
-                        ) : "online"}
-                      </p>
-                    </div>
+            <div className="w-full max-w-[340px] rounded-lg border border-border bg-background overflow-hidden shadow-sm">
+              {/* Header */}
+              <div className="flex items-center justify-between px-4 py-2.5 border-b border-border bg-card">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-full bg-muted flex items-center justify-center">
+                    <span className="text-xs font-bold text-foreground">M</span>
                   </div>
-
-                  {/* Messages */}
-                  <div className="flex-1 px-2 py-3 space-y-1.5 overflow-hidden flex flex-col justify-end">
-                    {messages.map((message, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 8, scale: 0.95 }}
-                        animate={visibleMessages.includes(index) ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 8, scale: 0.95 }}
-                        transition={{ duration: 0.25 }}
-                        className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}
-                      >
-                        <div className={`max-w-[85%] px-2.5 py-1 rounded-lg text-[10px] md:text-xs leading-relaxed ${
-                          message.type === "user" ? "bg-[#005c4b] text-white rounded-br-sm" : "bg-[#1f2c34] text-white rounded-bl-sm"
-                        }`}>
-                          <span>{message.text}</span>
-                          {message.type === "user" && (
-                            <span className="inline-flex items-center ml-1.5 text-[8px] md:text-[9px] text-[#8696a0]">
-                              <span className="mr-0.5">now</span>
-                              <ReadReceipt read={isMessageRead(index)} />
-                            </span>
-                          )}
-                          {message.type === "migo" && (
-                            <span className="inline-flex items-center ml-1.5 text-[8px] md:text-[9px] text-[#8696a0]">now</span>
-                          )}
-                        </div>
-                      </motion.div>
-                    ))}
-
-                    <AnimatePresence>
-                      {showTyping && (
-                        <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }}>
-                          <TypingIndicator />
-                        </motion.div>
-                      )}
-                      {showUserComposing && <UserComposingIndicator />}
-                    </AnimatePresence>
-                  </div>
-
-                  {/* Input */}
-                  <div className="px-2 pb-2 flex-shrink-0">
-                    <div className="bg-[#1f2c34] rounded-full px-3 py-1.5 flex items-center">
-                      <span className="text-[#8696a0] text-[10px] md:text-xs flex-1">Message</span>
-                    </div>
+                  <div>
+                    <p className="text-sm font-semibold text-foreground leading-tight">Migo</p>
+                    <p className="text-[10px] text-muted-foreground leading-tight">
+                      {showTyping ? (
+                        <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-foreground">typing…</motion.span>
+                      ) : "online"}
+                    </p>
                   </div>
                 </div>
-
-                {/* Notch */}
-                <div className="absolute top-3 left-1/2 -translate-x-1/2 w-16 h-4 bg-[#111] rounded-full" />
+                <button
+                  onClick={() => playConversation()}
+                  disabled={isPlaying}
+                  className="flex items-center gap-1 text-[10px] text-muted-foreground hover:text-foreground transition-colors disabled:opacity-40"
+                  title="Replay conversation"
+                >
+                  <RotateCcw className={`w-3 h-3 ${isPlaying ? "animate-spin" : ""}`} />
+                  <span>Replay</span>
+                </button>
               </div>
 
-              {/* Replay */}
-              <motion.button
-                onClick={() => playConversation()}
-                disabled={isPlaying}
-                className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-1.5 text-xs transition-colors disabled:opacity-50 text-muted-foreground hover:text-foreground"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <RotateCcw className={`w-3 h-3 ${isPlaying ? "animate-spin" : ""}`} />
-                <span>Replay</span>
-              </motion.button>
+              {/* Messages */}
+              <div className="px-3 py-3 space-y-1.5 min-h-[220px] max-h-[320px] overflow-y-auto flex flex-col justify-end">
+                {messages.map((message, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 6, scale: 0.97 }}
+                    animate={visibleMessages.includes(index) ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 6, scale: 0.97 }}
+                    transition={{ duration: 0.2 }}
+                    className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}
+                  >
+                    <div className={`max-w-[85%] px-2.5 py-1.5 rounded-lg text-xs leading-relaxed ${
+                      message.type === "user"
+                        ? "bg-foreground text-background rounded-br-sm"
+                        : "bg-muted text-foreground rounded-bl-sm"
+                    }`}>
+                      <span>{message.text}</span>
+                      {message.type === "user" && (
+                        <span className="inline-flex items-center ml-1.5 text-[9px] opacity-60">
+                          <span className="mr-0.5">now</span>
+                          <ReadReceipt read={isMessageRead(index)} />
+                        </span>
+                      )}
+                      {message.type === "migo" && (
+                        <span className="inline-flex items-center ml-1.5 text-[9px] text-muted-foreground">now</span>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
+
+                <AnimatePresence>
+                  {showTyping && (
+                    <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.15 }}>
+                      <TypingIndicator />
+                    </motion.div>
+                  )}
+                  {showUserComposing && <UserComposingIndicator />}
+                </AnimatePresence>
+              </div>
+
+              {/* Input */}
+              <div className="px-3 pb-3">
+                <div className="bg-muted rounded-md px-3 py-2 flex items-center">
+                  <span className="text-muted-foreground text-xs">Message</span>
+                </div>
+              </div>
             </div>
           </div>
 
