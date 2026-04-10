@@ -160,7 +160,7 @@ const Demo = () => {
                           {message.type === "user" && (
                             <span className="inline-flex items-center ml-1.5 text-[8px] md:text-[9px] text-[#8696a0]">
                               <span className="mr-0.5">now</span>
-                              <ReadReceipt isRead={isMessageRead(index)} />
+                              <ReadReceipt read={isMessageRead(index)} />
                             </span>
                           )}
                           {message.type === "migo" && (
