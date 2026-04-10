@@ -5,10 +5,12 @@ import Employers from "@/components/landing/Employers";
 import Candidates from "@/components/landing/Candidates";
 import Pilot from "@/components/landing/Pilot";
 import AnimatedSection from "@/components/landing/AnimatedSection";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 const Index = () => (
   <>
     <Header />
+    <FloatingWhatsApp />
     <main>
       <AnimatedSection>
         <Hero />

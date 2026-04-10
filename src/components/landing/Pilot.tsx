@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
+
+// TODO: Replace with your Kapso WhatsApp number (digits only, e.g. "34612345678")
+const WHATSAPP_NUMBER = "REPLACE_ME";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hi Migo, I'm interested in the pilot!")}`;
 
 const Pilot = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -49,6 +54,15 @@ const Pilot = () => {
               Request access
             </Button>
             <p className="text-xs text-muted-foreground">Migo will reply with the pilot brief.</p>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 text-sm font-medium text-[#25D366] hover:underline pt-1"
+            >
+              <WhatsAppIcon className="w-4 h-4" />
+              Or chat with Migo on WhatsApp
+            </a>
           </form>
         )}
       </div>

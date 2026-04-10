@@ -1,4 +1,9 @@
 import { Button } from "@/components/ui/button";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
+
+// TODO: Replace with your Kapso WhatsApp number (digits only, e.g. "34612345678")
+const WHATSAPP_NUMBER = "REPLACE_ME";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hi Migo, I'd like to learn more!")}`;
 
 const Hero = () => (
   <section className="pt-28 pb-20 px-6" id="top">
@@ -11,12 +16,18 @@ const Hero = () => (
         <p className="text-lg text-muted-foreground max-w-lg">
           A WhatsApp and voice agent that interviews candidates, checks signal, and hands employers a ranked shortlist with receipts.
         </p>
-        <div className="flex gap-3 pt-2">
+        <div className="flex flex-wrap gap-3 pt-2">
           <Button asChild size="lg" className="rounded-full font-semibold">
             <a href="#pilot">Start the pilot</a>
           </Button>
           <Button asChild variant="outline" size="lg" className="rounded-full font-semibold">
             <a href="#demo">See Migo work</a>
+          </Button>
+          <Button asChild size="lg" className="rounded-full font-semibold bg-[#25D366] hover:bg-[#1da851] text-white">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+              <WhatsAppIcon className="w-5 h-5" />
+              Chat with Migo
+            </a>
           </Button>
         </div>
       </div>
