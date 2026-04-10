@@ -1,31 +1,24 @@
 
 
-## Copy WhatsApp styles from AIE_C project
-
-Replace the current plain chat mockup in `Demo.tsx` with the realistic WhatsApp dark-theme phone UI from the [AIE Connect](/projects/0f7603b4-f76e-4ea6-b335-e216b3b956c6) project.
+## Add Click-to-WhatsApp Button
 
 ### What changes
 
-1. **Rewrite `src/components/landing/Demo.tsx`** — Replace the current flat chat card with the `WhatsAppPhone` component pattern from AIE_C's `HowItWorks.tsx`. This includes:
-   - Dark phone frame (`bg-[#111]`, rounded corners, notch)
-   - WhatsApp dark header (`bg-[#1f2c34]`) with avatar circle, name "Migo", and "online" / "typing..." status
-   - Message bubbles: outgoing `bg-[#005c4b]` (green, rounded-br-sm), incoming `bg-[#1f2c34]` (dark, rounded-bl-sm)
-   - Animated typing indicator (three bouncing dots) and user composing indicator
-   - Read receipts (double-check marks, blue when read)
-   - Timestamps on each message
-   - Auto-play conversation on scroll into view with staggered timing
-   - Replay button below the phone
-   - Bottom input bar styled as WhatsApp (`bg-[#1f2c34]` rounded pill)
+1. **Hero section** (`src/components/landing/Hero.tsx`) — Add a prominent "Chat with Migo on WhatsApp" button with the WhatsApp icon. Links to `https://wa.me/{PHONE_NUMBER}` (opens in new tab).
 
-2. **Keep the employer scoreboard** on the right side — no changes there.
+2. **Pilot section** (`src/components/landing/Pilot.tsx`) — Add a secondary WhatsApp CTA alongside or below the existing form.
 
-3. **Conversation content** stays Migo-branded (screening for a product role), just displayed in the new WhatsApp style with the animated reveal.
+3. **Floating WhatsApp button** (optional) — A small fixed-position WhatsApp icon in the bottom-right corner, visible on all pages, that links to the same `wa.me` URL.
+
+### What you need to provide
+
+- Your Kapso WhatsApp phone number (international format, digits only, e.g. `34612345678`)
+- Optional: a pre-filled greeting message (e.g. "Hi Migo, I'd like to learn more")
 
 ### Technical details
 
-- Uses `framer-motion` (already installed) for `motion.div` animations, `AnimatePresence`, and `useInView`
-- Adapts the `WhatsAppPhone`, `TypingIndicator`, `UserComposingIndicator`, and `ReadReceipt` sub-components inline in `Demo.tsx` (no new files needed)
-- Replaces the interactive text input with the auto-playing animated conversation — more visually impressive and requires no user interaction
-- Message timing: ~1.4s typing delay for Migo messages, ~0.7s composing delay for user messages
-- All references use "Migo" instead of "AIE_C"
+- No API keys or backend needed — just an `<a href="https://wa.me/...">` link
+- WhatsApp icon SVG already exists in `Demo.tsx`, will reuse it
+- Button styled with green WhatsApp brand color (`#25D366`)
+- `target="_blank"` and `rel="noopener noreferrer"` for security
 
