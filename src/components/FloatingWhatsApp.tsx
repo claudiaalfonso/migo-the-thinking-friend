@@ -14,7 +14,7 @@ const QUICK_REPLIES = [
 ];
 
 function getWhatsAppUrl(text: string) {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+  return `https://api.whatsapp.com/send/?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(text)}&type=phone_number&app_absent=0`;
 }
 
 function TypingDots() {
