@@ -1,9 +1,4 @@
 import { Button } from "@/components/ui/button";
-import WhatsAppIcon from "@/components/WhatsAppIcon";
-import { openWhatsAppUrl } from "@/lib/whatsapp";
-
-const WHATSAPP_NUMBER = "12084084168";
-const WHATSAPP_URL = `https://api.whatsapp.com/send/?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent("Hi Migo, I'd like to learn more!")}&type=phone_number&app_absent=0`;
 
 const Hero = () => (
   <section className="pt-32 pb-24 px-6" id="top">
