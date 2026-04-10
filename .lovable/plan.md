@@ -1,28 +1,31 @@
 
 
-## Migo AI — Landing Page
+## Copy WhatsApp styles from AIE_C project
 
-Rebuild the "Scout Recruiting" landing page as a React app, rebranded to **Migo AI** with the agent named **Migo**.
+Replace the current plain chat mockup in `Demo.tsx` with the realistic WhatsApp dark-theme phone UI from the [AIE Connect](/projects/0f7603b4-f76e-4ea6-b335-e216b3b956c6) project.
 
-### What gets built
+### What changes
 
-1. **Header** — "MIGO" brand mark + "AI" + "Agentic hiring" tagline. Nav links: Employers, Candidates, Pilot.
+1. **Rewrite `src/components/landing/Demo.tsx`** — Replace the current flat chat card with the `WhatsAppPhone` component pattern from AIE_C's `HowItWorks.tsx`. This includes:
+   - Dark phone frame (`bg-[#111]`, rounded corners, notch)
+   - WhatsApp dark header (`bg-[#1f2c34]`) with avatar circle, name "Migo", and "online" / "typing..." status
+   - Message bubbles: outgoing `bg-[#005c4b]` (green, rounded-br-sm), incoming `bg-[#1f2c34]` (dark, rounded-bl-sm)
+   - Animated typing indicator (three bouncing dots) and user composing indicator
+   - Read receipts (double-check marks, blue when read)
+   - Timestamps on each message
+   - Auto-play conversation on scroll into view with staggered timing
+   - Replay button below the phone
+   - Bottom input bar styled as WhatsApp (`bg-[#1f2c34]` rounded pill)
 
-2. **Hero Section** — Headline and subtext rebranded to Migo (e.g. "Migo screens candidates before your calendar gets wrecked."). Two CTA buttons: "Start the pilot" and "See Migo work". Placeholder hero image area.
+2. **Keep the employer scoreboard** on the right side — no changes there.
 
-3. **Demo Section** — "WhatsApp first" showcase with:
-   - Simulated phone chat UI (messages from Migo)
-   - Employer scoreboard with ranked candidate cards and evidence summary
+3. **Conversation content** stays Migo-branded (screening for a product role), just displayed in the new WhatsApp style with the animated reveal.
 
-4. **Employers Section** — Three-step feature list (Role intake → Agentic screening → Human-ready shortlist), all copy referencing Migo instead of Scout.
+### Technical details
 
-5. **Candidates Section** — Value prop for candidates with tags: Voice portfolio, Async screen, Matched roles, Warm intros.
-
-6. **Pilot Section** — Form with email input, hiring need dropdown, and "Request access" button. Note: "Migo will reply with the pilot brief."
-
-### Design
-- Fonts: Inter + Space Mono (Google Fonts)
-- Monochrome/minimal aesthetic matching the original
-- Responsive layout
-- All "Scout" references → "Migo", "Scout Recruiting" → "Migo AI"
+- Uses `framer-motion` (already installed) for `motion.div` animations, `AnimatePresence`, and `useInView`
+- Adapts the `WhatsAppPhone`, `TypingIndicator`, `UserComposingIndicator`, and `ReadReceipt` sub-components inline in `Demo.tsx` (no new files needed)
+- Replaces the interactive text input with the auto-playing animated conversation — more visually impressive and requires no user interaction
+- Message timing: ~1.4s typing delay for Migo messages, ~0.7s composing delay for user messages
+- All references use "Migo" instead of "AIE_C"
 
