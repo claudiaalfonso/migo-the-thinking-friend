@@ -101,6 +101,7 @@ const Demo = () => {
   };
 
   useEffect(() => {
+    // Auto-play conversation when section comes into view
     if (isInView && !hasPlayed) {
       setHasPlayed(true);
       const timer = setTimeout(() => playConversation(), 500);
@@ -110,6 +111,14 @@ const Demo = () => {
       };
     }
   }, [isInView, hasPlayed]);
+
+  // Show all messages immediately if animation has completed
+  useEffect(() => {
+    if (!isPlaying && hasPlayed && visibleMessages.length === 0) {
+      // Fallback: show all messages if animation didn't run properly
+      setVisibleMessages(messages.map((_, i) => i));
+    }
+  }, [isPlaying, hasPlayed, visibleMessages.length]);
 
   return (
     <section className="py-24 px-6 border-t-2 border-foreground" id="demo" ref={ref}>
