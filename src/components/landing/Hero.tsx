@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import { openWhatsAppUrl } from "@/lib/whatsapp";
 
 // TODO: Replace with your Kapso WhatsApp number (digits only, e.g. "34612345678")
 const WHATSAPP_NUMBER = "12084084168";
@@ -23,11 +24,16 @@ const Hero = () => (
           <Button asChild variant="outline" size="lg" className="rounded-full font-semibold">
             <a href="#demo">See Migo work</a>
           </Button>
-          <Button asChild size="lg" className="rounded-full font-semibold bg-[#25D366] hover:bg-[#1da851] text-white">
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+          <Button
+            type="button"
+            size="lg"
+            className="rounded-full font-semibold bg-[#25D366] hover:bg-[#1da851] text-white"
+            onClick={() => openWhatsAppUrl(WHATSAPP_URL)}
+          >
+            <span className="flex items-center gap-2">
               <WhatsAppIcon className="w-5 h-5" />
               Chat with Migo
-            </a>
+            </span>
           </Button>
         </div>
       </div>
