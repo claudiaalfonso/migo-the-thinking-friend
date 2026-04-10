@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 
 // TODO: Replace with your Kapso WhatsApp number (digits only, e.g. "34612345678")
-const WHATSAPP_NUMBER = "REPLACE_ME";
+const WHATSAPP_NUMBER = "12084084168";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hi Migo, I'm interested in the pilot!")}`;
 
 const Pilot = () => {
