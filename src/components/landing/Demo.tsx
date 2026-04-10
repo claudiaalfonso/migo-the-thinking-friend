@@ -4,7 +4,49 @@ import { useRef, useState, useEffect } from "react";
 import { RotateCcw, Check, MessageCircle } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 
-const Demo = () => {
+const messages = [
+  { type: "migo", text: "Hey! What kind of role are you after?" },
+  { type: "user", text: "Senior ML, Barcelona or remote EU, €70k+" },
+  { type: "migo", text: "Preferred company size?" },
+  { type: "user", text: "Under 50 people, ideally seed/Series A" },
+  { type: "migo", text: "Got 2 matches. Glint (Series A, AI infrastructure) and Wayve (autonomous vehicles). Want intros?" },
+  { type: "user", text: "Yes to Glint, pass on Wayve" },
+  { type: "migo", text: "Done. Glint's CTO will reach out today. Good luck!" },
+];
+
+function TypingIndicator() {
+  return (
+    <div className="flex justify-start">
+      <div className="bg-[#1f2c34] rounded-lg rounded-bl-sm px-3 py-2 flex items-center gap-1">
+        <motion.span className="w-1.5 h-1.5 bg-[#8696a0] rounded-full" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1, repeat: Infinity, delay: 0 }} />
+        <motion.span className="w-1.5 h-1.5 bg-[#8696a0] rounded-full" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1, repeat: Infinity, delay: 0.2 }} />
+        <motion.span className="w-1.5 h-1.5 bg-[#8696a0] rounded-full" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1, repeat: Infinity, delay: 0.4 }} />
+      </div>
+    </div>
+  );
+}
+
+function UserComposingIndicator() {
+  return (
+    <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.15 }} className="flex justify-end">
+      <div className="bg-[#005c4b] rounded-lg rounded-br-sm px-3 py-2 flex items-center gap-1">
+        <motion.span className="w-1.5 h-1.5 bg-[#8696a0] rounded-full" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1, repeat: Infinity, delay: 0 }} />
+        <motion.span className="w-1.5 h-1.5 bg-[#8696a0] rounded-full" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1, repeat: Infinity, delay: 0.2 }} />
+        <motion.span className="w-1.5 h-1.5 bg-[#8696a0] rounded-full" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 1, repeat: Infinity, delay: 0.4 }} />
+      </div>
+    </motion.div>
+  );
+}
+
+function ReadReceipt({ read }: { read: boolean }) {
+  return (
+    <span className="inline-flex ml-1">
+      <Check className={`w-3 h-3 ${read ? "text-[#53bdeb]" : "text-[#8696a0]"}`} />
+      <Check className={`w-3 h-3 -ml-1.5 ${read ? "text-[#53bdeb]" : "text-[#8696a0]"}`} />
+    </span>
+  );
+}
+
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
