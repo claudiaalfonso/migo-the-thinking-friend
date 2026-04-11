@@ -113,9 +113,12 @@ const Hero = () => {
     }
   }, [isInView, hasPlayed]);
 
+  // Keep messages visible after animation completes - don't reset
+  const [animationComplete, setAnimationComplete] = useState(false);
+  
   useEffect(() => {
-    if (!isPlaying && hasPlayed && visibleMessages.length === 0) {
-      setVisibleMessages(heroMessages.map((_, i) => i));
+    if (!isPlaying && hasPlayed && visibleMessages.length === heroMessages.length) {
+      setAnimationComplete(true);
     }
   }, [isPlaying, hasPlayed, visibleMessages.length]);
 
@@ -143,7 +146,7 @@ const Hero = () => {
 
         {/* WhatsApp Chat */}
         <div className="flex items-center justify-center">
-          <div className="w-full max-w-[380px] rounded-xl border-2 border-foreground bg-card overflow-hidden shadow-lg transform rotate-1">
+          <div className="w-full max-w-[380px] rounded-xl border-2 border-foreground bg-card overflow-hidden shadow-lg">
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b-2 border-foreground bg-card">
               <div className="flex items-center gap-3">
