@@ -4,13 +4,13 @@ const Hero = () => (
   <section className="pt-32 pb-24 px-6" id="top">
     <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div className="space-y-8">
-        <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground">Agentic hiring layer</p>
+        <p className="text-sm font-medium text-muted-foreground tracking-wide">Agentic hiring layer</p>
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight text-foreground">
           Hiring is already hard.
           <br className="hidden sm:block" />
           <span className="block mt-2 sm:mt-4">Coordination shouldn&apos;t make it worse.</span>
         </h1>
-        <p className="text-lg sm:text-xl max-w-xl leading-relaxed text-muted-foreground">
+        <p className="text-base sm:text-lg max-w-xl leading-[1.8] text-muted-foreground">
           Migo is an AI hiring partner that keeps candidate information fresh, matches people to the right roles, and drives the conversation from screening to interview.
         </p>
         <div className="flex flex-wrap gap-4 pt-4">
