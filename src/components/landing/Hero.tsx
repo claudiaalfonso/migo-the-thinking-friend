@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { RotateCcw, Check } from "lucide-react";
 const heroMessages = [
@@ -47,11 +47,15 @@ function ReadReceipt({ read }: { read: boolean }) {
 }
 
 const Hero = () => {
-  // Start with all messages visible for instant load
-  const [visibleMessages, setVisibleMessages] = useState<number[]>(() => heroMessages.map((_, i) => i));
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  
+  // Start empty, auto-play when section comes into view
+  const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
   const [showTyping, setShowTyping] = useState(false);
   const [showUserComposing, setShowUserComposing] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [hasPlayed, setHasPlayed] = useState(false);
   const timeoutIds = useRef<NodeJS.Timeout[]>([]);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
@@ -98,6 +102,15 @@ const Hero = () => {
     });
   };
 
+  // Auto-play when section comes into view
+  useEffect(() => {
+    if (isInView && !hasPlayed) {
+      setHasPlayed(true);
+      const timer = setTimeout(() => playConversation(), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [isInView, hasPlayed]);
+
   // Scroll chat container to bottom during replay only
   useEffect(() => {
     if (messagesContainerRef.current && isPlaying) {
@@ -113,7 +126,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="pt-32 pb-24 px-6" id="top">
+    <section ref={sectionRef} className="pt-32 pb-24 px-6" id="top">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
         <div className="space-y-8">
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight text-foreground">
