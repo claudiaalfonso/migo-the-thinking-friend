@@ -1,9 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { RotateCcw, Check } from "lucide-react";
-import { useInView } from "framer-motion";
-
 const heroMessages = [
   { type: "user", text: "Hey, I'm looking for product roles. I've been leading design systems and AI features for the last 4 years." },
   { type: "migo", text: "Love that! You can reply by text or voice note. I'll keep your profile updated and surface relevant roles as they come up." },
@@ -49,14 +47,12 @@ function ReadReceipt({ read }: { read: boolean }) {
 }
 
 const Hero = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-
-  const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
+  // Start with all messages visible for instant load, no flicker
+  const [visibleMessages, setVisibleMessages] = useState<number[]>(() => heroMessages.map((_, i) => i));
   const [showTyping, setShowTyping] = useState(false);
   const [showUserComposing, setShowUserComposing] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [hasPlayed, setHasPlayed] = useState(false);
+  const [hasPlayed, setHasPlayed] = useState(true); // Start as played to prevent auto-play
   const timeoutIds = useRef<NodeJS.Timeout[]>([]);
 
   const isMessageRead = (index: number) => {
@@ -102,28 +98,15 @@ const Hero = () => {
     });
   };
 
+  // Cleanup timeouts on unmount
   useEffect(() => {
-    if (isInView && !hasPlayed) {
-      setHasPlayed(true);
-      const timer = setTimeout(() => playConversation(), 800);
-      return () => {
-        clearTimeout(timer);
-        timeoutIds.current.forEach(clearTimeout);
-      };
-    }
-  }, [isInView, hasPlayed]);
-
-  // Keep messages visible after animation completes - don't reset
-  const [animationComplete, setAnimationComplete] = useState(false);
-  
-  useEffect(() => {
-    if (!isPlaying && hasPlayed && visibleMessages.length === heroMessages.length) {
-      setAnimationComplete(true);
-    }
-  }, [isPlaying, hasPlayed, visibleMessages.length]);
+    return () => {
+      timeoutIds.current.forEach(clearTimeout);
+    };
+  }, []);
 
   return (
-    <section className="pt-32 pb-24 px-6" id="top" ref={ref}>
+    <section className="pt-32 pb-24 px-6" id="top">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
         <div className="space-y-8">
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight text-foreground">
