@@ -6,7 +6,7 @@ const Candidates = () => (
       <div className="space-y-6">
         <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground">For candidates</p>
         <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-foreground leading-[1.1]">
-          No portals. No mystery forms. Just a useful hiring chat.
+          No portals. No mystery forms. Just a better way to hire and get hired.
         </h2>
         <p className="text-lg text-muted-foreground leading-relaxed">
           Share your background through text or voice. Keep your profile updated over time. Move through screening with low friction.
