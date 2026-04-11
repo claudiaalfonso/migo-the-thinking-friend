@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { RotateCcw, Check } from "lucide-react";
 
@@ -45,11 +45,15 @@ function ReadReceipt({ read }: { read: boolean }) {
 }
 
 const Demo = () => {
-  // Start with all messages visible for instant load
-  const [visibleMessages, setVisibleMessages] = useState<number[]>(() => messages.map((_, i) => i));
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  
+  // Start empty, auto-play when section comes into view
+  const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
   const [showTyping, setShowTyping] = useState(false);
   const [showUserComposing, setShowUserComposing] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [hasPlayed, setHasPlayed] = useState(false);
   const timeoutIds = useRef<NodeJS.Timeout[]>([]);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
@@ -96,6 +100,15 @@ const Demo = () => {
     });
   };
 
+  // Auto-play when section comes into view
+  useEffect(() => {
+    if (isInView && !hasPlayed) {
+      setHasPlayed(true);
+      const timer = setTimeout(() => playConversation(), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [isInView, hasPlayed]);
+
   // Scroll chat container to bottom during replay only
   useEffect(() => {
     if (messagesContainerRef.current && isPlaying) {
@@ -111,7 +124,7 @@ const Demo = () => {
   }, []);
 
   return (
-    <section className="py-24 px-6 border-t-2 border-foreground" id="demo">
+    <section ref={sectionRef} className="py-24 px-6 border-t-2 border-foreground" id="demo">
       <div className="max-w-7xl mx-auto space-y-12">
         <div className="space-y-4 max-w-2xl">
           <p className="text-sm font-medium text-muted-foreground tracking-wide">WhatsApp first</p>
