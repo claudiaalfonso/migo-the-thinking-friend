@@ -47,13 +47,13 @@ function ReadReceipt({ read }: { read: boolean }) {
 }
 
 const Hero = () => {
-  // Start with all messages visible for instant load, no flicker
+  // Start with all messages visible for instant load
   const [visibleMessages, setVisibleMessages] = useState<number[]>(() => heroMessages.map((_, i) => i));
   const [showTyping, setShowTyping] = useState(false);
   const [showUserComposing, setShowUserComposing] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [hasPlayed, setHasPlayed] = useState(true); // Start as played to prevent auto-play
   const timeoutIds = useRef<NodeJS.Timeout[]>([]);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const isMessageRead = (index: number) => {
     if (heroMessages[index].type !== "user") return false;
@@ -97,6 +97,13 @@ const Hero = () => {
       }
     });
   };
+
+  // Scroll to bottom when messages change
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [visibleMessages, showTyping, showUserComposing]);
 
   // Cleanup timeouts on unmount
   useEffect(() => {
@@ -155,42 +162,49 @@ const Hero = () => {
             </div>
 
             {/* Messages */}
-            <div className="px-4 py-4 space-y-2 min-h-[280px] max-h-[340px] overflow-y-auto flex flex-col justify-end bg-background">
-              {heroMessages.map((message, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 6, scale: 0.97 }}
-                  animate={visibleMessages.includes(index) ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 6, scale: 0.97 }}
-                  transition={{ duration: 0.2 }}
-                  className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}
-                >
-                  <div className={`max-w-[85%] px-3 py-2 rounded-lg text-sm leading-relaxed ${
-                    message.type === "user"
-                      ? "bg-foreground text-background rounded-br-sm"
-                      : "bg-muted text-foreground rounded-bl-sm"
-                  }`}>
-                    <span>{message.text}</span>
-                    {message.type === "user" && (
-                      <span className="inline-flex items-center ml-2 text-[9px] opacity-60">
-                        <span className="mr-0.5">now</span>
-                        <ReadReceipt read={isMessageRead(index)} />
-                      </span>
-                    )}
-                    {message.type === "migo" && (
-                      <span className="inline-flex items-center ml-2 text-[9px] text-muted-foreground">now</span>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
+            <div className="px-4 py-4 space-y-2 min-h-[280px] max-h-[340px] overflow-y-auto bg-background">
+              <AnimatePresence mode="popLayout">
+                {heroMessages.map((message, index) => (
+                  visibleMessages.includes(index) && (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}
+                    >
+                      <div className={`max-w-[85%] px-3 py-2 rounded-lg text-sm leading-relaxed ${
+                        message.type === "user"
+                          ? "bg-foreground text-background rounded-br-sm"
+                          : "bg-muted text-foreground rounded-bl-sm"
+                      }`}>
+                        <span>{message.text}</span>
+                        {message.type === "user" && (
+                          <span className="inline-flex items-center ml-2 text-[9px] opacity-60">
+                            <span className="mr-0.5">now</span>
+                            <ReadReceipt read={isMessageRead(index)} />
+                          </span>
+                        )}
+                        {message.type === "migo" && (
+                          <span className="inline-flex items-center ml-2 text-[9px] text-muted-foreground">now</span>
+                        )}
+                      </div>
+                    </motion.div>
+                  )
+                ))}
 
-              <AnimatePresence>
                 {showTyping && (
-                  <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.15 }}>
+                  <motion.div key="typing" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }}>
                     <TypingIndicator />
                   </motion.div>
                 )}
-                {showUserComposing && <UserComposingIndicator />}
+                {showUserComposing && (
+                  <motion.div key="user-composing" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }}>
+                    <UserComposingIndicator />
+                  </motion.div>
+                )}
               </AnimatePresence>
+              <div ref={messagesEndRef} />
             </div>
 
             {/* Input */}
