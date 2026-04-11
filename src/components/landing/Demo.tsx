@@ -1,5 +1,4 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { RotateCcw, Check } from "lucide-react";
 
@@ -48,13 +47,13 @@ function ReadReceipt({ read }: { read: boolean }) {
 
 const Demo = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
+  // Start with all messages visible for instant load, no flicker
+  const [visibleMessages, setVisibleMessages] = useState<number[]>(() => messages.map((_, i) => i));
   const [showTyping, setShowTyping] = useState(false);
   const [showUserComposing, setShowUserComposing] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [hasPlayed, setHasPlayed] = useState(false);
+  const [hasPlayed, setHasPlayed] = useState(true); // Start as played to prevent auto-play
   const timeoutIds = useRef<NodeJS.Timeout[]>([]);
 
   const isMessageRead = (index: number) => {
@@ -100,26 +99,12 @@ const Demo = () => {
     });
   };
 
+  // Cleanup timeouts on unmount
   useEffect(() => {
-    // Auto-play conversation when section comes into view
-    if (isInView && !hasPlayed) {
-      setHasPlayed(true);
-      const timer = setTimeout(() => playConversation(), 500);
-      return () => {
-        clearTimeout(timer);
-        timeoutIds.current.forEach(clearTimeout);
-      };
-    }
-  }, [isInView, hasPlayed]);
-
-  // Track when animation is complete to prevent reset
-  const [animationComplete, setAnimationComplete] = useState(false);
-  
-  useEffect(() => {
-    if (!isPlaying && hasPlayed && visibleMessages.length === messages.length) {
-      setAnimationComplete(true);
-    }
-  }, [isPlaying, hasPlayed, visibleMessages.length]);
+    return () => {
+      timeoutIds.current.forEach(clearTimeout);
+    };
+  }, []);
 
   return (
     <section className="py-24 px-6 border-t-2 border-foreground" id="demo" ref={ref}>
