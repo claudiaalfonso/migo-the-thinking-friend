@@ -30,7 +30,8 @@ const Pilot = () => {
 
         {submitted ? (
           <div className="flex items-center justify-center">
-            <div className="bg-card rounded-xl p-8 text-center">
+            <div className="bg-card rounded-xl p-8 text-center space-y-4">
+              <img src="/migo-cat.png" alt="Migo" className="w-16 h-16 mx-auto" />
               <p className="text-xl font-bold text-foreground">Thanks! Migo will reply with the pilot brief.</p>
             </div>
           </div>

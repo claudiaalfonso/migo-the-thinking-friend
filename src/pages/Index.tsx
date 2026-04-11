@@ -34,7 +34,8 @@ const Index = () => {
       </AnimatedSection>
     </main>
     <footer className="py-10 px-6 border-t border-border text-center text-xs text-muted-foreground">
-      © {new Date().getFullYear()} Migo AI. All rights reserved.
+      <img src="/migo-cat.png" alt="Migo" className="w-10 h-10 mx-auto mb-3 opacity-80" />
+      <p>© {new Date().getFullYear()} Migo AI. All rights reserved.</p>
     </footer>
   </>
   );
