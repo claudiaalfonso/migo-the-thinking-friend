@@ -4,7 +4,6 @@ const Hero = () => (
   <section className="pt-32 pb-24 px-6" id="top">
     <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div className="space-y-8">
-        <p className="text-sm font-medium text-muted-foreground tracking-wide">Agentic hiring layer</p>
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight text-foreground">
           Hiring is already hard.
           <br className="hidden sm:block" />
