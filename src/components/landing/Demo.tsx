@@ -3,13 +3,12 @@ import { useRef, useState, useEffect } from "react";
 import { RotateCcw, Check } from "lucide-react";
 
 const messages = [
-  { type: "migo", text: "Hi, I'm Migo, an AI hiring assistant. What kind of roles are you most interested in right now?" },
-  { type: "user", text: "Senior product roles, remote EU, ideally at an early-stage startup" },
-  { type: "migo", text: "Got it. Could you share your current availability and salary expectations?" },
-  { type: "user", text: "Available in 2 weeks, looking for €80k+" },
-  { type: "migo", text: "I found a role that looks like a strong fit. Would you like me to move you forward for this opportunity?" },
-  { type: "user", text: "Yes, let's do it" },
-  { type: "migo", text: "Done. The team would like to move forward. I'll help coordinate the next step." },
+  { type: "migo", text: "Hey! I found someone who looks like a strong fit for this role. They're targeting senior product roles, open to remote across Europe, and ideally want an early-stage startup. Availability is in 2 weeks, and salary expectations are around \u20AC80k+." },
+  { type: "migo", text: "One thing to note: remote is a strong preference, so worth checking how flexible the team is there. Want me to move them forward?" },
+  { type: "user", text: "Yes, please. Remote is fine on our side. A couple of things before you do: have they worked directly with product and engineering teams, and do we know how hands-on they are day to day?" },
+  { type: "migo", text: "Yes, from what they shared, they've been leading design systems and AI feature work, so there's clear cross-functional exposure with both product and engineering." },
+  { type: "migo", text: "They also sound hands-on, not purely managerial. I can ask one follow-up to confirm how much of their recent work was strategic vs executional if you want." },
+  { type: "user", text: "Yes, please check that. Also confirm whether they're actively interviewing or just casually exploring." },
 ];
 
 function TypingIndicator() {
@@ -52,7 +51,7 @@ const Demo = () => {
   const [showUserComposing, setShowUserComposing] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const timeoutIds = useRef<NodeJS.Timeout[]>([]);
-  const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const isMessageRead = (index: number) => {
     if (messages[index].type !== "user") return false;
@@ -97,12 +96,12 @@ const Demo = () => {
     });
   };
 
-  // Scroll chat container to bottom when messages change (only during replay)
+  // Scroll to bottom when messages change
   useEffect(() => {
-    if (messagesContainerRef.current && isPlaying) {
-      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [visibleMessages, showTyping, showUserComposing, isPlaying]);
+  }, [visibleMessages, showTyping, showUserComposing]);
 
   // Cleanup timeouts on unmount
   useEffect(() => {
@@ -150,7 +149,7 @@ const Demo = () => {
               </div>
 
               {/* Messages */}
-              <div ref={messagesContainerRef} className="px-4 py-4 space-y-2 min-h-[240px] max-h-[360px] overflow-y-auto bg-background">
+              <div className="px-4 py-4 space-y-2 min-h-[240px] max-h-[360px] overflow-y-auto bg-background">
                 <AnimatePresence mode="popLayout">
                   {messages.map((message, index) => (
                     visibleMessages.includes(index) && (
@@ -192,6 +191,7 @@ const Demo = () => {
                     </motion.div>
                   )}
                 </AnimatePresence>
+                <div ref={messagesEndRef} />
               </div>
 
               {/* Input */}
