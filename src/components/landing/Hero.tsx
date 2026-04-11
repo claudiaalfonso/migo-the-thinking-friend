@@ -24,11 +24,11 @@ const Hero = () => (
       </div>
       <div className="flex items-center justify-center">
         <div className="w-full max-w-md aspect-[4/3] rounded-2xl bg-foreground flex flex-col items-center justify-center p-8 transform rotate-2 shadow-2xl">
-          <img src="/migo-cat-outline.png" alt="Migo" className="w-28 h-28 object-contain" />
-          <div className="flex items-center gap-1 mt-4">
+          <div className="flex items-center gap-1">
             <span className="bg-background text-foreground px-2 py-1 text-xs font-black">MIGO</span>
             <span className="border border-background text-background px-2 py-1 text-xs font-black">AI</span>
           </div>
+          <img src="/migo-cat-outline.png" alt="Migo" className="w-28 h-28 object-contain mt-4" />
           <div className="bg-[hsl(var(--lime))] px-4 py-2 mt-4">
             <p className="text-foreground font-mono text-xs tracking-widest uppercase">Hiring in motion</p>
           </div>
