@@ -5,17 +5,11 @@ const Hero = () => (
     <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div className="space-y-8">
         <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground">Agentic hiring layer</p>
-        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[0.95] tracking-tight text-foreground">
-          Migo is the agentic hiring layer for fast-moving teams.
+        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[0.95] tracking-tight text-foreground text-balance">
+          Hiring is already hard. Coordination shouldn&apos;t make it worse.
         </h1>
-        <p className="text-xl max-w-lg leading-relaxed">
-          <span className="text-muted-foreground">Migo turns </span>
-          <span className="font-semibold text-foreground">WhatsApp conversations</span>
-          <span className="text-muted-foreground"> and </span>
-          <span className="font-semibold text-foreground">dormant talent pools</span>
-          <span className="text-muted-foreground"> into </span>
-          <span className="font-semibold text-foreground">ranked shortlists</span>
-          <span className="text-muted-foreground">, fresh candidate profiles, and interview-ready pipelines.</span>
+        <p className="text-xl max-w-lg leading-relaxed text-muted-foreground tracking-wide">
+          Migo is the agentic hiring layer for fast-moving teams.
         </p>
         <div className="flex flex-wrap gap-4 pt-4">
           <Button asChild size="lg" className="h-14 px-8 rounded-md font-bold text-base bg-[hsl(var(--lime))] text-foreground hover:bg-[hsl(78,84%,60%)]">
