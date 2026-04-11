@@ -29,7 +29,9 @@ const Hero = () => (
             <span className="bg-background text-foreground px-2 py-1 text-xs font-black">MIGO</span>
             <span className="border border-background text-background px-2 py-1 text-xs font-black">AI</span>
           </div>
-          <p className="text-background/70 font-mono text-xs tracking-widest uppercase mt-4">Hiring in motion</p>
+          <div className="bg-[hsl(var(--lime))] px-4 py-2 mt-4">
+            <p className="text-foreground font-mono text-xs tracking-widest uppercase">Hiring in motion</p>
+          </div>
         </div>
       </div>
     </div>
