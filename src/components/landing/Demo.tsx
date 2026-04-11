@@ -137,9 +137,7 @@ const Demo = () => {
               {/* Header */}
               <div className="flex items-center justify-between px-4 py-3 border-b-2 border-foreground bg-card">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-foreground flex items-center justify-center">
-                    <span className="text-xs font-black text-background">M</span>
-                  </div>
+                  <img src="/migo-cat.png" alt="Migo" className="w-8 h-8 rounded-full object-cover" />
                   <div>
                     <p className="text-sm font-bold text-foreground leading-tight">Migo</p>
                     <p className="text-[10px] text-muted-foreground leading-tight">
