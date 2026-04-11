@@ -27,7 +27,12 @@ const Hero = () => (
             <span className="bg-background text-foreground px-2 py-1 text-xs font-black">MIGO</span>
             <span className="border border-background text-background px-2 py-1 text-xs font-black">AI</span>
           </div>
-          <img src="/migo-cat-outline.png" alt="Migo" className="w-28 h-28 object-contain mt-4" />
+          <img 
+            src="/migo-cat-outline.png" 
+            alt="Migo" 
+            className="w-28 h-28 object-contain mt-4" 
+            style={{ filter: 'drop-shadow(0 0 2px white) drop-shadow(0 0 2px white) drop-shadow(0 0 1px white)' }}
+          />
           <div className="bg-[hsl(var(--lime))] px-4 py-2 mt-4">
             <p className="text-foreground font-mono text-xs tracking-widest uppercase">Hiring in motion</p>
           </div>
