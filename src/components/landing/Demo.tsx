@@ -52,7 +52,7 @@ const Demo = () => {
   const [showUserComposing, setShowUserComposing] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const timeoutIds = useRef<NodeJS.Timeout[]>([]);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   const isMessageRead = (index: number) => {
     if (messages[index].type !== "user") return false;
@@ -97,12 +97,12 @@ const Demo = () => {
     });
   };
 
-  // Scroll to bottom when messages change
+  // Scroll chat container to bottom when messages change (only during replay)
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    if (messagesContainerRef.current && isPlaying) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
     }
-  }, [visibleMessages, showTyping, showUserComposing]);
+  }, [visibleMessages, showTyping, showUserComposing, isPlaying]);
 
   // Cleanup timeouts on unmount
   useEffect(() => {
@@ -150,7 +150,7 @@ const Demo = () => {
               </div>
 
               {/* Messages */}
-              <div className="px-4 py-4 space-y-2 min-h-[240px] max-h-[360px] overflow-y-auto bg-background">
+              <div ref={messagesContainerRef} className="px-4 py-4 space-y-2 min-h-[240px] max-h-[360px] overflow-y-auto bg-background">
                 <AnimatePresence mode="popLayout">
                   {messages.map((message, index) => (
                     visibleMessages.includes(index) && (
@@ -192,7 +192,6 @@ const Demo = () => {
                     </motion.div>
                   )}
                 </AnimatePresence>
-                <div ref={messagesEndRef} />
               </div>
 
               {/* Input */}
