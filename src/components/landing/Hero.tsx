@@ -4,7 +4,6 @@ const Hero = () => (
   <section className="pt-32 pb-24 px-6" id="top">
     <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div className="space-y-8">
-        <p className="text-sm font-medium text-muted-foreground tracking-wide">Agentic hiring layer</p>
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight text-foreground">
           Hiring is already hard.
           <br className="hidden sm:block" />
@@ -24,12 +23,14 @@ const Hero = () => (
       </div>
       <div className="flex items-center justify-center">
         <div className="w-full max-w-md aspect-[4/3] rounded-2xl bg-foreground flex flex-col items-center justify-center p-8 transform rotate-2 shadow-2xl">
-          <img src="/migo-cat-outline.png" alt="Migo" className="w-28 h-28 object-contain" />
-          <div className="flex items-center gap-1 mt-4">
+          <div className="flex items-center gap-1">
             <span className="bg-background text-foreground px-2 py-1 text-xs font-black">MIGO</span>
             <span className="border border-background text-background px-2 py-1 text-xs font-black">AI</span>
           </div>
-          <p className="text-background/70 font-mono text-xs tracking-widest uppercase mt-4">Hiring in motion</p>
+          <img src="/migo-cat-outline.png" alt="Migo" className="w-28 h-28 object-contain mt-4" />
+          <div className="bg-[hsl(var(--lime))] px-4 py-2 mt-4">
+            <p className="text-foreground font-mono text-xs tracking-widest uppercase">Hiring in motion</p>
+          </div>
         </div>
       </div>
     </div>
