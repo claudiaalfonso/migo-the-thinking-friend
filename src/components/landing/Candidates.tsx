@@ -1,4 +1,4 @@
-const tags = ["Voice portfolio", "Async screen", "Matched roles", "Warm intros"];
+const tags = ["Join via WhatsApp", "Text or voice", "Profile stays fresh", "Matched to roles"];
 
 const Candidates = () => (
   <section className="py-24 px-6 bg-[hsl(var(--sky))]" id="candidates">
@@ -9,7 +9,7 @@ const Candidates = () => (
           No portals. No mystery forms. Just a useful hiring chat.
         </h2>
         <p className="text-lg text-muted-foreground leading-relaxed">
-          Migo helps candidates explain what they have actually built, where they want to work, and which teams should hear from them next.
+          Share your background through text or voice. Keep your profile updated over time. Move through screening with low friction.
         </p>
       </div>
       <div className="grid grid-cols-2 gap-4">

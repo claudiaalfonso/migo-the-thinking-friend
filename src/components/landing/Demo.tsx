@@ -4,13 +4,13 @@ import { useRef, useState, useEffect } from "react";
 import { RotateCcw, Check } from "lucide-react";
 
 const messages = [
-  { type: "migo", text: "Hey! What kind of role are you after?" },
-  { type: "user", text: "Senior ML, Barcelona or remote EU, €70k+" },
-  { type: "migo", text: "Preferred company size?" },
-  { type: "user", text: "Under 50 people, ideally seed/Series A" },
-  { type: "migo", text: "Got 2 matches. Glint (Series A, AI infrastructure) and Wayve (autonomous vehicles). Want intros?" },
-  { type: "user", text: "Yes to Glint, pass on Wayve" },
-  { type: "migo", text: "Done. Glint's CTO will reach out today. Good luck!" },
+  { type: "migo", text: "Hi, I'm Migo, an AI hiring assistant. What kind of roles are you most interested in right now?" },
+  { type: "user", text: "Senior product roles, remote EU, ideally at an early-stage startup" },
+  { type: "migo", text: "Got it. Could you share your current availability and salary expectations?" },
+  { type: "user", text: "Available in 2 weeks, looking for €80k+" },
+  { type: "migo", text: "I found a role that looks like a strong fit. Would you like me to move you forward for this opportunity?" },
+  { type: "user", text: "Yes, let's do it" },
+  { type: "migo", text: "Done. The team would like to move forward. I'll help coordinate the next step." },
 ];
 
 function TypingIndicator() {
@@ -126,7 +126,7 @@ const Demo = () => {
         <div className="space-y-4 max-w-2xl">
           <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground">WhatsApp first</p>
           <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-foreground leading-[1.1]">
-            Migo keeps the chat warm, then structures the evidence.
+            Warm, direct, and always keeping profiles fresh.
           </h2>
         </div>
 
