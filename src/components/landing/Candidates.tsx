@@ -9,7 +9,7 @@ const Candidates = () => (
           No portals. No mystery forms. Just a better way to hire and get hired.
         </h2>
         <p className="text-base text-muted-foreground leading-[1.8]">
-          Join once through WhatsApp, keep your profile alive over time, and get surfaced for relevant roles as they open.
+          Join once through WhatsApp, keep your profile alive by chatting with Migo, and get surfaced for relevant roles as they open.
         </p>
       </div>
       <div className="grid grid-cols-2 gap-4">
