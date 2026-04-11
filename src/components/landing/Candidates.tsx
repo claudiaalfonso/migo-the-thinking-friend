@@ -1,7 +1,7 @@
 const tags = ["Join via WhatsApp", "Text or voice", "Profile stays fresh", "Matched to roles"];
 
 const Candidates = () => (
-  <section className="py-24 px-6 bg-[hsl(var(--sky))]" id="candidates">
+  <section className="py-24 px-6 bg-[hsl(var(--sky))] border-t border-foreground" id="candidates">
     <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div className="space-y-6">
         <p className="text-sm font-medium text-muted-foreground tracking-wide">For candidates</p>
