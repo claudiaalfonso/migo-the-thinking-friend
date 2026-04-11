@@ -8,7 +8,7 @@ const Employers = () => (
   <section className="py-24 px-6" id="employers">
     <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16">
       <div className="space-y-4">
-        <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground">How it works</p>
+        <p className="text-sm font-medium text-muted-foreground tracking-wide">How it works</p>
         <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-foreground leading-[1.1]">
           Screen candidates, match to roles, coordinate next steps.
         </h2>
@@ -20,7 +20,7 @@ const Employers = () => (
               <span className="bg-[hsl(var(--sky))] text-foreground font-mono text-xs font-bold px-2 py-1 rounded">{s.num}</span>
               <div className="space-y-2">
                 <h3 className="text-xl font-black text-foreground">{s.title}</h3>
-                <p className="text-muted-foreground">{s.desc}</p>
+                <p className="text-muted-foreground leading-[1.7]">{s.desc}</p>
               </div>
             </div>
           </article>

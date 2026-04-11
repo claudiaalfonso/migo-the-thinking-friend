@@ -124,7 +124,7 @@ const Demo = () => {
     <section className="py-24 px-6 border-t-2 border-foreground" id="demo" ref={ref}>
       <div className="max-w-7xl mx-auto space-y-12">
         <div className="space-y-4 max-w-2xl">
-          <p className="font-mono text-xs tracking-widest uppercase text-muted-foreground">WhatsApp first</p>
+          <p className="text-sm font-medium text-muted-foreground tracking-wide">WhatsApp first</p>
           <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-foreground leading-[1.1]">
             Warm, direct, and always keeping profiles fresh.
           </h2>
