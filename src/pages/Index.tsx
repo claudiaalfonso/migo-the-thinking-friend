@@ -1,5 +1,6 @@
 import Header from "@/components/landing/Header";
 import Hero from "@/components/landing/Hero";
+import About from "@/components/landing/About";
 import Demo from "@/components/landing/Demo";
 import Employers from "@/components/landing/Employers";
 import Candidates from "@/components/landing/Candidates";
@@ -15,6 +16,9 @@ const Index = () => {
     <main>
       <AnimatedSection>
         <Hero />
+      </AnimatedSection>
+      <AnimatedSection delay={0.05}>
+        <About />
       </AnimatedSection>
       <AnimatedSection delay={0.05}>
         <Demo />
