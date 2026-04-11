@@ -112,11 +112,12 @@ const Demo = () => {
     }
   }, [isInView, hasPlayed]);
 
-  // Show all messages immediately if animation has completed
+  // Track when animation is complete to prevent reset
+  const [animationComplete, setAnimationComplete] = useState(false);
+  
   useEffect(() => {
-    if (!isPlaying && hasPlayed && visibleMessages.length === 0) {
-      // Fallback: show all messages if animation didn't run properly
-      setVisibleMessages(messages.map((_, i) => i));
+    if (!isPlaying && hasPlayed && visibleMessages.length === messages.length) {
+      setAnimationComplete(true);
     }
   }, [isPlaying, hasPlayed, visibleMessages.length]);
 
