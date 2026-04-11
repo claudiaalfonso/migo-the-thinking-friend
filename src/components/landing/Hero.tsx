@@ -23,21 +23,9 @@ const Hero = () => (
         </div>
       </div>
       <div className="flex items-center justify-center">
-        <div className="w-full max-w-md aspect-[4/3] rounded-2xl bg-foreground flex items-center justify-center p-8 transform rotate-2 shadow-2xl">
-          <div className="text-background space-y-4 text-center">
-            <div className="flex items-center justify-center gap-2">
-              <span className="bg-background text-foreground px-2 py-1 text-xs font-black">MIGO</span>
-              <span className="bg-[hsl(var(--lime))] text-foreground px-2 py-1 text-xs font-black">HIRING</span>
-            </div>
-            <div className="font-mono text-sm space-y-1">
-              <p>Migo</p>
-              <p>Talent</p>
-              <p>Screening</p>
-            </div>
-            <div className="inline-block bg-[hsl(var(--lime))] text-foreground px-3 py-1 text-xs font-mono font-bold mt-4">
-              94% MATCH
-            </div>
-          </div>
+        <div className="w-full max-w-md aspect-[4/3] rounded-2xl bg-foreground flex flex-col items-center justify-center p-8 transform rotate-2 shadow-2xl">
+          <img src="/migo-cat-outline.png" alt="Migo" className="w-32 h-32 object-contain" />
+          <p className="text-background font-mono text-sm tracking-widest uppercase mt-6">Hiring in motion</p>
         </div>
       </div>
     </div>
