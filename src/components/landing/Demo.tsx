@@ -46,15 +46,15 @@ function ReadReceipt({ read }: { read: boolean }) {
 
 const Demo = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { margin: "-100px" });
   
   const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
   const [showTyping, setShowTyping] = useState(false);
   const [showUserComposing, setShowUserComposing] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [hasPlayed, setHasPlayed] = useState(false);
   const timeoutIds = useRef<NodeJS.Timeout[]>([]);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const hasAutoPlayed = useRef(false);
 
   const isMessageRead = (index: number) => {
     if (messages[index].type !== "user") return false;
@@ -100,14 +100,14 @@ const Demo = () => {
   };
 
   useEffect(() => {
-    if (isInView && !hasPlayed) {
-      setHasPlayed(true);
-      const frame = requestAnimationFrame(() => {
+    if (isInView && !hasAutoPlayed.current) {
+      hasAutoPlayed.current = true;
+      const timer = window.setTimeout(() => {
         playConversation();
-      });
-      return () => cancelAnimationFrame(frame);
+      }, 250);
+      return () => window.clearTimeout(timer);
     }
-  }, [isInView, hasPlayed]);
+  }, [isInView]);
 
   useEffect(() => {
     if (messagesContainerRef.current && isPlaying) {
