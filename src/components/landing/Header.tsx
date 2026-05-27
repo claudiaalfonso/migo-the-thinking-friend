@@ -7,8 +7,10 @@ const Header = () => (
         <span className="hidden sm:inline text-xs font-mono tracking-widest uppercase text-muted-foreground ml-3">Agentic hiring</span>
       </a>
       <nav className="flex items-center gap-8 text-sm font-semibold text-foreground">
+        <a href="#why-teams" className="hover:opacity-70 transition-opacity">Why Migo</a>
         <a href="#employers" className="hover:opacity-70 transition-opacity">Employers</a>
         <a href="#candidates" className="hover:opacity-70 transition-opacity">Candidates</a>
+        <a href="#faq" className="hover:opacity-70 transition-opacity">FAQ</a>
         <a href="#pilot" className="hover:opacity-70 transition-opacity">Pilot</a>
       </nav>
     </div>
