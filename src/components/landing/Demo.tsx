@@ -3,8 +3,8 @@ import { useRef, useState, useEffect } from "react";
 import { RotateCcw, Check } from "lucide-react";
 
 const messages = [
-  { type: "migo", text: "Hey :) I found someone who looks like a strong fit here. They are targeting senior product roles, open to remote across Europe, and most excited by early-stage startups. They could start in 2 weeks and are looking for around €80k+." },
-  { type: "migo", text: "One quick note :) remote is a strong preference, so it is worth checking how flexible the team can be. Want me to move them forward?" },
+  { type: "migo", text: "Hey 🙂 I found someone who looks like a strong fit here. They are targeting senior product roles, open to remote across Europe, and most excited by early-stage startups. They could start in 2 weeks and are looking for around €80k+." },
+  { type: "migo", text: "One quick note: remote is a strong preference, so it is worth checking how flexible the team can be. Want me to move them forward?" },
   { type: "user", text: "Yes, please. Remote is fine on our side. A couple of things before you do: have they worked directly with product and engineering teams, and do we know how hands-on they are day to day?" },
   { type: "migo", text: "Yes, from what they shared, they've been leading design systems and AI feature work, so there's clear cross-functional exposure with both product and engineering." },
   { type: "migo", text: "They also sound hands-on, not purely managerial. I can ask one follow-up to confirm how much of their recent work was strategic vs executional if you want." },
