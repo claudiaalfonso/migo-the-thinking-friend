@@ -10,13 +10,13 @@ const outcomes = [
   },
   {
     label: "Coordination",
-    title: "Reduces recruiter coordination load",
+    title: "Reduces coordination load",
     description:
       "Screening, follow-ups, and next-step logistics happen in one conversational flow instead of scattered manual outreach.",
   },
   {
     label: "Screening",
-    title: "Turns conversations into ranked shortlists",
+    title: "Turns conversations into shortlists",
     description:
       "Recruiters get structured hiring signal and clear candidate summaries they can act on quickly.",
   },
@@ -57,7 +57,9 @@ const WhyTeams = () => {
               <div className="inline-flex w-fit self-start rounded-md bg-[hsl(var(--lime))] px-2 py-1 text-xs font-mono font-bold uppercase tracking-wide text-foreground">
                 {outcome.label}
               </div>
-              <h3 className="text-2xl font-black tracking-tight text-foreground leading-tight">{outcome.title}</h3>
+              <h3 className="text-2xl font-black tracking-tight text-foreground leading-tight lg:min-h-[4.75rem]">
+                {outcome.title}
+              </h3>
               <p className="text-muted-foreground leading-[1.8]">{outcome.description}</p>
             </motion.article>
           ))}
