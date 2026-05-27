@@ -41,7 +41,7 @@ const Index = () => {
       <img src="/migo-cat.png" alt="Migo" className="w-10 h-10 mx-auto mb-3 opacity-80" />
       <p>{`© ${new Date().getFullYear()} Migo AI. All rights reserved.`}</p>
       <div className="mt-4 flex items-center justify-center">
-        <span className="inline-flex items-center rounded-full border border-foreground/20 bg-card px-4 py-1.5 text-[11px] font-semibold tracking-[0.08em] text-foreground/80">
+        <span className="inline-flex items-center rounded-full bg-foreground px-4 py-2 text-xs font-semibold tracking-[0.08em] text-background shadow-sm">
           ElevenLabs Grant
         </span>
       </div>
