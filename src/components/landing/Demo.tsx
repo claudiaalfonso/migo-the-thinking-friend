@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import { RotateCcw, Check } from "lucide-react";
 
 const messages = [
-  { type: "migo", text: "Hey! I found someone who looks like a strong fit for this role. They're targeting senior product roles, open to remote across Europe, and ideally want an early-stage startup. Availability is in 2 weeks, and salary expectations are around \u20AC80k+." },
+  { type: "migo", text: "Hey! I found someone who looks like a strong fit for this role. They're targeting senior product roles, open to remote across Europe, and ideally want an early-stage startup. Availability is in 2 weeks, and salary expectations are around €80k+." },
   { type: "migo", text: "One thing to note: remote is a strong preference, so worth checking how flexible the team is there. Want me to move them forward?" },
   { type: "user", text: "Yes, please. Remote is fine on our side. A couple of things before you do: have they worked directly with product and engineering teams, and do we know how hands-on they are day to day?" },
   { type: "migo", text: "Yes, from what they shared, they've been leading design systems and AI feature work, so there's clear cross-functional exposure with both product and engineering." },
@@ -48,7 +48,6 @@ const Demo = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   
-  // Start empty, auto-play when section comes into view
   const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
   const [showTyping, setShowTyping] = useState(false);
   const [showUserComposing, setShowUserComposing] = useState(false);
@@ -100,7 +99,6 @@ const Demo = () => {
     });
   };
 
-  // Auto-play when section comes into view
   useEffect(() => {
     if (isInView && !hasPlayed) {
       setHasPlayed(true);
@@ -109,14 +107,12 @@ const Demo = () => {
     }
   }, [isInView, hasPlayed]);
 
-  // Scroll chat container to bottom during replay only
   useEffect(() => {
     if (messagesContainerRef.current && isPlaying) {
       messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
     }
   }, [visibleMessages, showTyping, showUserComposing, isPlaying]);
 
-  // Cleanup timeouts on unmount
   useEffect(() => {
     return () => {
       timeoutIds.current.forEach(clearTimeout);
@@ -127,17 +123,14 @@ const Demo = () => {
     <section ref={sectionRef} className="py-24 px-6 border-t-2 border-foreground" id="demo">
       <div className="max-w-7xl mx-auto space-y-12">
         <div className="space-y-4 max-w-2xl">
-          <p className="text-sm font-medium text-muted-foreground tracking-wide">WhatsApp first</p>
           <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-foreground leading-[1.1]">
             Warm, direct, and always keeping profiles fresh.
           </h2>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Chat widget */}
           <div className="flex justify-center">
             <div className="w-full max-w-[380px] rounded-xl border-2 border-foreground bg-card overflow-hidden shadow-lg">
-              {/* Header */}
               <div className="flex items-center justify-between px-4 py-3 border-b-2 border-foreground bg-card">
                 <div className="flex items-center gap-3">
                   <img src="/migo-cat.png" alt="Migo" className="w-8 h-8 rounded-full object-cover" />
@@ -161,7 +154,6 @@ const Demo = () => {
                 </button>
               </div>
 
-              {/* Messages */}
               <div ref={messagesContainerRef} className="px-4 py-4 space-y-2 min-h-[240px] max-h-[360px] overflow-y-auto bg-background">
                 <AnimatePresence mode="popLayout">
                   {messages.map((message, index) => (
@@ -206,7 +198,6 @@ const Demo = () => {
                 </AnimatePresence>
               </div>
 
-              {/* Input */}
               <div className="px-4 pb-4 bg-background">
                 <div className="bg-muted border border-border rounded-lg px-4 py-2.5 flex items-center">
                   <span className="text-muted-foreground text-sm">Message</span>
@@ -215,7 +206,6 @@ const Demo = () => {
             </div>
           </div>
 
-          {/* Scoreboard */}
           <div className="space-y-6">
             <div className="space-y-2">
               <h3 className="text-3xl sm:text-4xl font-black text-foreground">Shortlist, ranked by hiring signal.</h3>
