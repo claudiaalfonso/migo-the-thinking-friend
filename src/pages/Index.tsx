@@ -3,7 +3,6 @@ import Hero from "@/components/landing/Hero";
 import About from "@/components/landing/About";
 import Demo from "@/components/landing/Demo";
 import Employers from "@/components/landing/Employers";
-import Candidates from "@/components/landing/Candidates";
 import WhyTeams from "@/components/landing/WhyTeams";
 import FAQ from "@/components/landing/FAQ";
 import Pilot from "@/components/landing/Pilot";
@@ -30,9 +29,6 @@ const Index = () => {
       </AnimatedSection>
       <AnimatedSection delay={0.05}>
         <Employers />
-      </AnimatedSection>
-      <AnimatedSection delay={0.05}>
-        <Candidates />
       </AnimatedSection>
       <AnimatedSection delay={0.05}>
         <FAQ />
