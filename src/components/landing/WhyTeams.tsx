@@ -16,7 +16,7 @@ const outcomes = [
   },
   {
     label: "Screening",
-    title: "Turns conversations into shortlists",
+    title: "Conversations turned shortlists",
     description:
       "Recruiters get structured hiring signal and clear candidate summaries they can act on quickly.",
   },
