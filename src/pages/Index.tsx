@@ -40,11 +40,6 @@ const Index = () => {
     <footer className="py-10 px-6 border-t border-border text-center text-xs text-muted-foreground">
       <img src="/migo-cat.png" alt="Migo" className="w-10 h-10 mx-auto mb-3 opacity-80" />
       <p>{`© ${new Date().getFullYear()} Migo AI. All rights reserved.`}</p>
-      <div className="mt-4 flex items-center justify-center">
-        <span className="inline-flex items-center rounded-full bg-foreground px-4 py-2 text-xs font-semibold tracking-[0.08em] text-background shadow-sm">
-          ElevenLabs Grant
-        </span>
-      </div>
     </footer>
   </>
   );
