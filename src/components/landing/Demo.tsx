@@ -154,7 +154,7 @@ const Demo = () => {
                 </button>
               </div>
 
-              <div ref={messagesContainerRef} className="px-4 py-4 space-y-2 min-h-[240px] max-h-[360px] overflow-y-auto bg-background">
+              <div ref={messagesContainerRef} className="h-[360px] overflow-y-auto bg-background px-4 py-4 space-y-2">
                 <AnimatePresence mode="popLayout">
                   {messages.map((message, index) => (
                     visibleMessages.includes(index) && (
@@ -171,15 +171,7 @@ const Demo = () => {
                             : "bg-muted text-foreground rounded-bl-sm"
                         }`}>
                           <span>{message.text}</span>
-                          {message.type === "user" && (
-                            <span className="inline-flex items-center ml-2 text-[9px] opacity-60">
-                              <span className="mr-0.5">now</span>
-                              <ReadReceipt read={isMessageRead(index)} />
-                            </span>
-                          )}
-                          {message.type === "migo" && (
-                            <span className="inline-flex items-center ml-2 text-[9px] text-muted-foreground">now</span>
-                          )}
+                          {message.type === "user" && <ReadReceipt read={isMessageRead(index)} />}
                         </div>
                       </motion.div>
                     )
