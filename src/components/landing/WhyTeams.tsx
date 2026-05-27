@@ -3,7 +3,7 @@ import { useRef } from "react";
 
 const outcomes = [
   {
-    label: "Candidates data",
+    label: "Candidate data",
     title: "Keeps candidate data fresh",
     description:
       "Migo stays in touch over WhatsApp so candidate context does not go stale between sourcing and hiring.",
@@ -44,15 +44,15 @@ const WhyTeams = () => {
           </p>
         </motion.div>
 
-        <motion.div style={{ y: gridY }} className="grid gap-4 lg:grid-cols-3">
+        <motion.div style={{ y: gridY }} className="grid gap-4 lg:grid-cols-3 auto-rows-fr">
           {outcomes.map((outcome, index) => (
             <motion.article
               key={outcome.title}
-              initial={{ opacity: 0, y: 32, rotate: index === 1 ? 0 : index === 0 ? -1.5 : 1.5 }}
-              whileInView={{ opacity: 1, y: 0, rotate: index === 1 ? 0 : index === 0 ? -0.75 : 0.75 }}
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: index * 0.08 }}
-              className="rounded-2xl border-2 border-foreground bg-background p-8 space-y-4"
+              className="flex h-full flex-col rounded-2xl border-2 border-foreground bg-background p-8 space-y-4"
             >
               <div className="inline-flex rounded-md bg-[hsl(var(--lime))] px-2 py-1 text-xs font-mono font-bold uppercase tracking-wide text-foreground">
                 {outcome.label}
