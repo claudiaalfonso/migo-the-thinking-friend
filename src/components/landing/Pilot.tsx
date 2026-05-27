@@ -19,7 +19,6 @@ const Pilot = () => {
     <section className="py-24 px-6 bg-foreground" id="pilot">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
         <div className="space-y-6">
-          <p className="text-sm font-medium text-muted-foreground tracking-wide">Who it&apos;s for</p>
           <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-background leading-[1.1]">
             Spend less time coordinating. Activate the talent you already have.
           </h2>
