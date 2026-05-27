@@ -53,6 +53,7 @@ const Hero = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const timeoutIds = useRef<NodeJS.Timeout[]>([]);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const hasAutoPlayed = useRef(false);
 
   const isMessageRead = (index: number) => {
     if (heroMessages[index].type !== "user") return false;
@@ -98,8 +99,14 @@ const Hero = () => {
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => playConversation(), 800);
-    return () => clearTimeout(timer);
+    if (hasAutoPlayed.current) return;
+    hasAutoPlayed.current = true;
+
+    const frame = requestAnimationFrame(() => {
+      playConversation();
+    });
+
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
