@@ -4,7 +4,6 @@ const Candidates = () => (
   <section className="py-24 px-6 bg-[hsl(var(--sky))] border-t border-foreground" id="candidates">
     <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div className="space-y-6">
-        <p className="text-sm font-medium text-muted-foreground tracking-wide">For candidates</p>
         <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-foreground leading-[1.1]">
           No portals. No mystery forms. Just a better way to hire and get hired.
         </h2>
