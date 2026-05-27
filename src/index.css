@@ -79,7 +79,9 @@
   p,
   a,
   button,
-  span {
+  li,
+  label,
+  small {
     font-family: 'IBM Plex Sans', sans-serif;
   }
   .font-mono {
