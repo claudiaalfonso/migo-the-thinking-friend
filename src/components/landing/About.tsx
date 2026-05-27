@@ -1,5 +1,5 @@
 const About = () => (
-  <section className="py-24 px-6 bg-[hsl(var(--lime)/0.15)]" id="about">
+  <section className="py-24 px-6 border-t-2 border-foreground bg-[hsl(var(--lime)/0.15)]" id="about">
     <div className="max-w-4xl mx-auto text-center space-y-8">
       <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-foreground leading-[1.15] text-balance">
         From screening to interview without the usual coordination chaos.
