@@ -54,7 +54,7 @@ const WhyTeams = () => {
               transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: index * 0.08 }}
               className="flex h-full flex-col rounded-2xl border-2 border-foreground bg-background p-8 space-y-4"
             >
-              <div className="inline-flex rounded-md bg-[hsl(var(--lime))] px-2 py-1 text-xs font-mono font-bold uppercase tracking-wide text-foreground">
+              <div className="inline-flex w-fit self-start rounded-md bg-[hsl(var(--lime))] px-2 py-1 text-xs font-mono font-bold uppercase tracking-wide text-foreground">
                 {outcome.label}
               </div>
               <h3 className="text-2xl font-black tracking-tight text-foreground leading-tight">{outcome.title}</h3>
