@@ -47,7 +47,6 @@ function ReadReceipt({ read }: { read: boolean }) {
 }
 
 const Hero = () => {
-  // Start empty, auto-play on mount
   const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
   const [showTyping, setShowTyping] = useState(false);
   const [showUserComposing, setShowUserComposing] = useState(false);
@@ -98,20 +97,17 @@ const Hero = () => {
     });
   };
 
-  // Auto-play on mount
   useEffect(() => {
     const timer = setTimeout(() => playConversation(), 800);
     return () => clearTimeout(timer);
   }, []);
 
-  // Scroll chat container to bottom during replay only
   useEffect(() => {
     if (messagesContainerRef.current && isPlaying) {
       messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
     }
   }, [visibleMessages, showTyping, showUserComposing, isPlaying]);
 
-  // Cleanup timeouts on unmount
   useEffect(() => {
     return () => {
       timeoutIds.current.forEach(clearTimeout);
@@ -140,10 +136,8 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* WhatsApp Chat */}
         <div className="flex items-center justify-center">
           <div className="w-full max-w-[380px] rounded-xl border-2 border-foreground bg-card overflow-hidden shadow-lg">
-            {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b-2 border-foreground bg-card">
               <div className="flex items-center gap-3">
                 <img src="/migo-cat.png" alt="Migo" className="w-8 h-8 rounded-full object-cover" />
@@ -167,8 +161,7 @@ const Hero = () => {
               </button>
             </div>
 
-            {/* Messages */}
-            <div ref={messagesContainerRef} className="px-4 py-4 space-y-2 min-h-[280px] max-h-[340px] overflow-y-auto bg-background">
+            <div ref={messagesContainerRef} className="h-[340px] overflow-y-auto bg-background px-4 py-4 space-y-2">
               <AnimatePresence mode="popLayout">
                 {heroMessages.map((message, index) => (
                   visibleMessages.includes(index) && (
@@ -185,15 +178,7 @@ const Hero = () => {
                           : "bg-muted text-foreground rounded-bl-sm"
                       }`}>
                         <span>{message.text}</span>
-                        {message.type === "user" && (
-                          <span className="inline-flex items-center ml-2 text-[9px] opacity-60">
-                            <span className="mr-0.5">now</span>
-                            <ReadReceipt read={isMessageRead(index)} />
-                          </span>
-                        )}
-                        {message.type === "migo" && (
-                          <span className="inline-flex items-center ml-2 text-[9px] text-muted-foreground">now</span>
-                        )}
+                        {message.type === "user" && <ReadReceipt read={isMessageRead(index)} />}
                       </div>
                     </motion.div>
                   )
@@ -212,7 +197,6 @@ const Hero = () => {
               </AnimatePresence>
             </div>
 
-            {/* Input */}
             <div className="px-4 pb-4 bg-background">
               <div className="bg-muted border border-border rounded-lg px-4 py-2.5 flex items-center">
                 <span className="text-muted-foreground text-sm">Message</span>
