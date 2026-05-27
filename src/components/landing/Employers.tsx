@@ -15,8 +15,10 @@ const Employers = () => (
       <div className="space-y-4">
         {steps.map((s) => (
           <article key={s.num} className="p-6 rounded-xl border-2 border-foreground bg-card">
-            <div className="flex items-start gap-4">
-              <span className="min-w-6 text-[hsl(var(--sky))] font-mono text-lg font-bold leading-none">{s.num}</span>
+            <div className="grid grid-cols-[2.5rem_1fr] items-start gap-4">
+              <span className="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-foreground font-mono text-base font-bold leading-none text-[#2F80ED]">
+                {s.num}
+              </span>
               <div className="space-y-2">
                 <h3 className="text-xl font-black text-foreground">{s.title}</h3>
                 <p className="text-muted-foreground leading-[1.7]">{s.desc}</p>
