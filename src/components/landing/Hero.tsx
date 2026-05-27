@@ -127,7 +127,7 @@ const Hero = () => {
             <br className="hidden sm:block" />
             <span className="block mt-2 sm:mt-4">Coordination shouldn&apos;t make it worse.</span>
           </h1>
-          <p className="text-base sm:text-lg max-w-xl leading-[1.8] text-muted-foreground">
+          <p className="max-w-2xl text-lg sm:text-[1.35rem] leading-[1.6] tracking-[-0.02em] text-foreground/68">
             Migo is an AI hiring partner that keeps candidate information fresh, matches people to the right roles, and drives the conversation from screening to interview.
           </p>
           <div className="flex flex-wrap gap-4 pt-4">
