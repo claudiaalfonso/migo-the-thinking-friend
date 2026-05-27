@@ -102,8 +102,10 @@ const Demo = () => {
   useEffect(() => {
     if (isInView && !hasPlayed) {
       setHasPlayed(true);
-      const timer = setTimeout(() => playConversation(), 500);
-      return () => clearTimeout(timer);
+      const frame = requestAnimationFrame(() => {
+        playConversation();
+      });
+      return () => cancelAnimationFrame(frame);
     }
   }, [isInView, hasPlayed]);
 
