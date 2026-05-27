@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { RotateCcw, Check } from "lucide-react";
 const heroMessages = [
@@ -54,6 +54,15 @@ const Hero = () => {
   const timeoutIds = useRef<NodeJS.Timeout[]>([]);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const hasAutoPlayed = useRef(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const copyY = useTransform(scrollYProgress, [0, 1], [36, -24]);
+  const chatY = useTransform(scrollYProgress, [0, 1], [72, -48]);
+  const chatRotate = useTransform(scrollYProgress, [0, 1], [2, -2]);
 
   const isMessageRead = (index: number) => {
     if (heroMessages[index].type !== "user") return false;
@@ -122,9 +131,9 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="pt-32 pb-24 px-6" id="top">
+    <section ref={sectionRef} className="pt-32 pb-24 px-6" id="top">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-        <div className="space-y-8">
+        <motion.div style={{ y: copyY }} className="space-y-8">
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight text-foreground">
             Hiring is already hard.
             <br className="hidden sm:block" />
@@ -141,9 +150,9 @@ const Hero = () => {
               <a href="#demo">See Migo work</a>
             </Button>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="flex items-center justify-center">
+        <motion.div style={{ y: chatY, rotate: chatRotate }} className="flex items-center justify-center">
           <div className="w-full max-w-[380px] rounded-xl border-2 border-foreground bg-card overflow-hidden shadow-lg">
             <div className="flex items-center justify-between px-4 py-3 border-b-2 border-foreground bg-card">
               <div className="flex items-center gap-3">
@@ -210,7 +219,7 @@ const Hero = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
