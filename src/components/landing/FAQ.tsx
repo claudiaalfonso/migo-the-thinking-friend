@@ -32,7 +32,6 @@ const FAQ = () => (
   <section className="py-24 px-6 border-t-2 border-foreground" id="faq">
     <div className="max-w-4xl mx-auto space-y-10">
       <div className="space-y-4 text-center">
-        <p className="text-sm font-medium text-muted-foreground tracking-wide">FAQ</p>
         <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-foreground leading-[1.1]">
           Questions teams usually ask first.
         </h2>
