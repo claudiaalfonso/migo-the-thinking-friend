@@ -20,12 +20,11 @@ const WhyTeams = () => (
   <section className="py-24 px-6 border-t-2 border-foreground bg-card" id="why-teams">
     <div className="max-w-7xl mx-auto space-y-12">
       <div className="max-w-2xl space-y-4">
-        <p className="text-sm font-medium text-muted-foreground tracking-wide">Why teams use Migo</p>
         <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-foreground leading-[1.1]">
           Better candidate coordination, without adding more recruiter overhead.
         </h2>
         <p className="text-base sm:text-lg text-muted-foreground leading-[1.8]">
-          Migo helps lean hiring teams keep candidate conversations alive, capture better signal, and move strong people forward faster.
+          Migo helps lean hiring teams keep candidate conversations alive and move strong people forward faster.
         </p>
       </div>
 
